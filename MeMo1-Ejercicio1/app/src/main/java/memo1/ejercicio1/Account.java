@@ -58,4 +58,10 @@ public class Account {
         return true;
     }
 
+    public boolean transfer(Account otherAccount, double amountToTranfer){
+        boolean operationSucces = this.withdraw(amountToTranfer);
+        if (operationSucces) operationSucces = otherAccount.deposit(amountToTransfer);
+        return operationSucces;
+    }
+
 }
