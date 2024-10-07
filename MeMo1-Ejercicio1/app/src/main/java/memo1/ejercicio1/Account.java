@@ -1,4 +1,5 @@
 package memo1.ejercicio1;
+import java.util.HashMap;
 
 public class Account {
     private Long cbu;
@@ -58,9 +59,11 @@ public class Account {
         return true;
     }
 
-    public boolean transfer(Account otherAccount, double amountToTranfer){
-        boolean operationSucces = this.withdraw(amountToTranfer);
-        if (operationSucces) operationSucces = otherAccount.deposit(amountToTransfer);
+    public boolean transfer(long otherAccountCbu, HashMap<Long, Account> accounts, double amountToTransfer){
+        if (!accounts.containsKey(cbu)) throw new IllegalArgumentException("La cuenta con este CBU no existe.");
+        Account otherAccount = accounts.get(otherAccountCbu);
+        boolean operationSucces = this.withdraw(amountToTransfer);
+        if (operationSucces) otherAccount.deposit(amountToTransfer);
         return operationSucces;
     }
 
