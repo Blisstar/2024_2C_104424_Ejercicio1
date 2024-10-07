@@ -1,12 +1,18 @@
 package memo1.ejercicio1;
 
 import static org.junit.Assert.*;
+
+import java.util.HashMap;
+
 import io.cucumber.java.en.*;
 
 // Pruebas funcionales basadas en los escenarios Gherkin
 
 public class AccountSteps {
+    private HashMap<Long, Account> accounts;
     private Account account;
+    private Account accountA;
+    private Account accountB;
     private boolean operationResult;
 
     @Given("I create an account with CBU {long}")
@@ -23,6 +29,15 @@ public class AccountSteps {
     @Given("An account with CBU {long} and a balance of {double}")
     public void anAccountWithCBUAndBalance(long cbu, double balance) {
         account = new Account(cbu, balance);
+    }
+
+    @Given("A account A with CBU {long} and a balance of {double} and other account B with CBU {long} and a balance of {double}")
+    public void twoAccountsWithCBUAndBalance(long cbuA, double balanceA, long cbuB, double balanceB){
+        accountA = new Account(cbuA, balanceA);
+        accountB = new Account(cbuB, balanceB);
+        accounts = new HashMap<>();
+        accounts.put(cbuA, accountA);
+        accounts.put(cbuB, accountB);
     }
 
     @When("I deposit {double} into the account")
@@ -45,6 +60,12 @@ public class AccountSteps {
         operationResult = account.withdraw(amount);
     }
 
+    @When("account A transfer {double} to account B")
+    public void transferFromAAccountToOtherAccount(double amount) { operationResult = accountA.transfer(accountB.getCbu(), accounts, amount); }
+
+    @When("account A try to transfer {double} to account B")
+    public void tryToTransferFromAAccountToOtherAccount(double amount) { operationResult = accountA.transfer(accountB.getCbu(), accounts, amount); }
+
     @Then("The account balance should be {double}")
     public void verifyAccountBalance(double expectedBalance) {
         assertEquals(expectedBalance, account.getBalance(), 0.01);
@@ -60,8 +81,19 @@ public class AccountSteps {
         assertEquals(expectedBalance, account.getBalance(), 0.01);
     }
 
+    @Then("The account A balance should be {double}")
+    public void verifyBalanceRemainsOfAccountA(double expectedBalance) { assertEquals(expectedBalance, accountA.getBalance(), 0.01); }
+
+    @Then("The account B balance should be {double}")
+    public void verifyBalanceRemainsOfAccountB(double expectedBalance) { assertEquals(expectedBalance, accountB.getBalance(), 0.01); }
+
     @Then("The operation should be denied due to insufficient funds")
     public void verifyInsufficientFunds() {
+        assertFalse(operationResult);
+    }
+
+    @Then("The operation should be denied due to lack of funds in the account A")
+    public void verifyInsufficientFundsToTransfer() {
         assertFalse(operationResult);
     }
 }
