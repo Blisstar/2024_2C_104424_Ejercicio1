@@ -3,44 +3,33 @@ import java.util.HashMap;
 
 public class Account {
     private Long cbu;
+    private String alias;
     private double balance;
 
-    public Account() {
-        this.balance = 0.0;
+    public Account(Long cbu, String alias) {
+        this.cbu = cbu;
+        this.alias = alias;
     }
 
-    public Account(double balance) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("Balance cannot be negative.");
-        }
-        this.balance = balance;
-    }
-
-    public Account(Long cbu, double balance) {
+    public Account(Long cbu, String alias, double balance) {
         if (balance < 0) {
             throw new IllegalArgumentException("Balance cannot be negative.");
         }
         this.cbu = cbu;
+        this.alias = alias;
         this.balance = balance;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public Long getCbu() {
         return cbu;
     }
 
-    public void setCbu(Long cbu) {
-        this.cbu = cbu;
-    }
-
     public double getBalance() {
         return balance;
-    }
-
-    public void setBalance(double balance) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("Balance cannot be negative.");
-        }
-        this.balance = balance;
     }
 
     public boolean withdraw(double amount) {
@@ -67,4 +56,7 @@ public class Account {
         return operationSucces;
     }
 
+    public String getAlias() {
+        return alias;
+    }
 }

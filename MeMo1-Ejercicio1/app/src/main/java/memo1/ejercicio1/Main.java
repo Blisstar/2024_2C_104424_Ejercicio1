@@ -7,13 +7,11 @@ public class Main {
         HashMap<Long, Account> accounts = new HashMap<>();
 
         // Crear una instancia de Account usando el constructor sin argumentos
-        Account account1 = new Account();
-        account1.setCbu(123456789L); // Asignar un CBU
+        Account account1 = new Account(123456789L,"alias", 1000.0);
         accounts.put(123456789L, account1);
-        account1.setBalance(1000.0); // Establecer el balance inicial
 
         // Crear una instancia de Account usando el constructor con saldo inicial
-        Account account2 = new Account(987654321L, 500.0);
+        Account account2 = new Account(987654321L, "alias", 500.0);
         accounts.put(987654321L, account2);
 
         // Realizar operaciones de depósito y retiro

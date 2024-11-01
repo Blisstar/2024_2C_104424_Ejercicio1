@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="memo1.ejercicio1.ClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-28T20:36:52" hostname="DESKTOP-15O2L9N" time="0.017">
+<testsuite name="memo1.ejercicio1.ClientTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-01T19:58:26" hostname="DESKTOP-15O2L9N" time="0.014">
   <properties/>
-  <testcase name="setAsMarriedWithWeddingDateWorksCorrectly()" classname="memo1.ejercicio1.ClientTest" time="0.017"/>
+  <testcase name="setAsMarriedWithMarriageDateIsBeforeBirthGiveAnError()" classname="memo1.ejercicio1.ClientTest" time="0.006"/>
+  <testcase name="defaultConstructorShouldInitializeMaritalStatusToSingle()" classname="memo1.ejercicio1.ClientTest" time="0.0"/>
+  <testcase name="defaultConstructorInitializeWithInvalidDNIGiveAnError()" classname="memo1.ejercicio1.ClientTest" time="0.002"/>
+  <testcase name="setAsSingleWorksCorrectly()" classname="memo1.ejercicio1.ClientTest" time="0.001"/>
+  <testcase name="defaultConstructorShouldInitializeCorrectly()" classname="memo1.ejercicio1.ClientTest" time="0.001"/>
+  <testcase name="setAsMarriedWithMarriageDateWorksCorrectly()" classname="memo1.ejercicio1.ClientTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

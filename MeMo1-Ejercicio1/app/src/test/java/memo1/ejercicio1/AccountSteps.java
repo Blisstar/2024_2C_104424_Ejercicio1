@@ -17,24 +17,23 @@ public class AccountSteps {
 
     @Given("I create an account with CBU {long}")
     public void createAccountWithDefaultBalance(long cbu) {
-        account = new Account();
-        account.setCbu(cbu);
+        account = new Account(cbu, "alias");
     }
 
     @Given("I create an account with CBU {long} and a balance of {double}")
     public void createAccountWithInitialBalance(long cbu, double balance) {
-        account = new Account(cbu, balance);
+        account = new Account(cbu, "alias", balance);
     }
 
     @Given("An account with CBU {long} and a balance of {double}")
     public void anAccountWithCBUAndBalance(long cbu, double balance) {
-        account = new Account(cbu, balance);
+        account = new Account(cbu, "alias", balance);
     }
 
     @Given("A account A with CBU {long} and a balance of {double} and other account B with CBU {long} and a balance of {double}")
     public void twoAccountsWithCBUAndBalance(long cbuA, double balanceA, long cbuB, double balanceB){
-        accountA = new Account(cbuA, balanceA);
-        accountB = new Account(cbuB, balanceB);
+        accountA = new Account(cbuA, "alias", balanceA);
+        accountB = new Account(cbuB, "alias", balanceB);
         accounts = new HashMap<>();
         accounts.put(cbuA, accountA);
         accounts.put(cbuB, accountB);

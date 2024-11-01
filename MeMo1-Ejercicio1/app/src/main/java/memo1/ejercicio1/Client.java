@@ -3,18 +3,22 @@ package memo1.ejercicio1;
 import java.time.LocalDate;
 
 public class Client {
-    String DNI;
-    String lastName;
-    String firstName;
-    LocalDate birthDate;
-    LocalDate weddingDate;
+    private String DNI;
+    private String lastName;
+    private String firstName;
+    private LocalDate birthDate;
+    private LocalDate marriageDate;
+    private Address address;
 
-    public Client(String dni, String lastName, String firstName, LocalDate birthDate) {
+    public Client(String dni, String lastName, String firstName, LocalDate birthDate, Address address) throws IncorrectDNI {
+        if (dni.length() != 7 && dni.length() != 8) throw new IncorrectDNI();
+        if (!dni.matches("\\d+")) throw new IncorrectDNI();
         this.DNI = dni;
         this.lastName = lastName;
         this.firstName = firstName;
         this.birthDate = birthDate;
-        this.weddingDate = null;
+        this.address = address;
+        this.marriageDate = null;
     }
 
     public String getDNI() {
@@ -34,14 +38,28 @@ public class Client {
     }
 
     public Boolean isItMarried() {
-        return weddingDate != null;
+        return marriageDate != null;
     }
 
-    public void setAsMarriedWithWeedingDate(LocalDate weedingDate) {
-        this.weddingDate = weedingDate;
+    public void setAsMarriedWithMarriageDate(LocalDate marriageDate) throws MarriageDateCantBeBeforeBirth {
+        if (marriageDate.isBefore(birthDate)) {
+            throw new MarriageDateCantBeBeforeBirth();
+        }
+        this.marriageDate = marriageDate;
     }
 
-    public LocalDate getWeddingDate() {
-        return weddingDate;
+    public LocalDate getMarriageDate() throws ClientIsntMarried {
+        if (marriageDate == null) {
+            throw new ClientIsntMarried();
+        }
+        return marriageDate;
+    }
+
+    public void setAsSingle() {
+        this.marriageDate = null;
+    }
+
+    public String getAddress() {
+        return address.toString();
     }
 }
