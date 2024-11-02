@@ -1,5 +1,6 @@
 package memo1.ejercicio1;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class BankingSystem {
@@ -7,10 +8,12 @@ public class BankingSystem {
 
     private HashMap<Long, Account> accounts;
     private HashMap<String, Long> cbuByAlias;
+    private HashMap<String, Client> clients;
     
     private BankingSystem() {
         accounts = new HashMap<>();
         cbuByAlias = new HashMap<>();
+        clients = new HashMap<>();
     }
 
     public static BankingSystem getInstance() {
@@ -43,5 +46,10 @@ public class BankingSystem {
     public Account getAccountByAlias(String alias) throws ThereIsNoAccountWithThatAlias {
         if (!cbuByAlias.containsKey(alias)) throw new ThereIsNoAccountWithThatAlias();
         return accounts.get(cbuByAlias.get(alias));
+    }
+
+    public void registerClient(String dni, String lastName, String firstName, LocalDate birtDate, Address address) throws Exception {
+        if (clients.containsKey(dni)) throw new ClientAlreadyExists();
+        clients.put(dni, new Client(dni, lastName, firstName, birtDate, address));
     }
 }

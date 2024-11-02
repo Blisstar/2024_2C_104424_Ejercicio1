@@ -5,8 +5,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
 
 public class BankingSystemTest {
     private Account account;
@@ -56,6 +59,28 @@ public class BankingSystemTest {
     void getAccountWithANonexistentAliasThrowsException() {
         assertThrows(ThereIsNoAccountWithThatAlias.class, () -> {
             BankingSystem.getInstance().getAccountByAlias("aliasSinCuenta");
+        });
+    }
+
+    @Test
+    void registerClientWorksCorrectly() throws Exception{
+        Address address = new Address("A", "B", "C", "Calle", 122);
+        
+        assertDoesNotThrow(() -> {
+            BankingSystem.getInstance().registerClient("42657569","Fernandez", "Joel", LocalDate.of(2000, 6, 19), address);
+        });
+    }
+
+    @Test
+    void registerClientThatItsDniAlreadyExistsThrowsException() throws Exception{
+        Address address = new Address("A", "B", "C", "Calle", 122);
+        
+        assertDoesNotThrow(() -> {
+            BankingSystem.getInstance().registerClient("42657569","Fernandez", "Joel", LocalDate.of(2000, 6, 19), address);
+        });
+
+        assertThrows(ClientAlreadyExists.class, () -> {
+            BankingSystem.getInstance().registerClient("42657569","Fernandez", "Joel", LocalDate.of(2000, 6, 19), address);
         });
     }
 }
