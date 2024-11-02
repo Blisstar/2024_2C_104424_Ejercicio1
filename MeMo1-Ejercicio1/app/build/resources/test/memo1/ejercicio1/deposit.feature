@@ -8,7 +8,7 @@ Feature: Depositing money
   Scenario: Cannot deposit a negative amount
     Given An account with CBU 123456789 and a balance of 1000.0
     When I try to deposit -100.0 into the account
-    Then The operation should be denied
+    Then The operation should be denied for negative amount
     And The account balance should remain 1000.0
 
   

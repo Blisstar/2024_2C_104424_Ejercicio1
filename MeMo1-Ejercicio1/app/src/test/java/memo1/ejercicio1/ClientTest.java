@@ -1,6 +1,6 @@
 package memo1.ejercicio1;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ClientTest {
-    private Address address;
+    private static Address address;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void init() {
         address = new Address("Argentina", "Buenos Aires", "CABA", "Paseo Colon", 123);
     }
 

@@ -1,10 +1,10 @@
 package memo1.ejercicio1;
-import java.util.HashMap;
 
 public class Account {
     private Long cbu;
     private String alias;
     private double balance;
+    private boolean isItRegister;
 
     public Account(Long cbu, String alias) {
         this.cbu = cbu;
@@ -32,31 +32,45 @@ public class Account {
         return balance;
     }
 
-    public boolean withdraw(double amount) {
-        if (amount <= 0 || amount > balance) {
-            return false;
-        }
+    public void withdraw(double amount) throws Exception {
+        if (!isItRegister) throw new UnregisteredAccount();
+        if (amount <= 0) throw new IllegalArgumentException("Amount cannot be negative or zero.");
+        if (amount > balance) throw new InsufficientFunds();
         balance -= amount;
-        return true;
     }
 
-    public boolean deposit(double amount) {
-        if (amount < 0) {
-            return false;
-        }
+    public boolean deposit(double amount) throws UnregisteredAccount {
+        if (!isItRegister) throw new UnregisteredAccount();
+        if (amount < 0) throw new IllegalArgumentException("Amount cannot be negative.");
         balance += amount;
         return true;
     }
 
-    public boolean transfer(long otherAccountCbu, HashMap<Long, Account> accounts, double amountToTransfer){
-        if (!accounts.containsKey(cbu)) throw new IllegalArgumentException("La cuenta con este CBU no existe.");
-        Account otherAccount = accounts.get(otherAccountCbu);
-        boolean operationSucces = this.withdraw(amountToTransfer);
-        if (operationSucces) otherAccount.deposit(amountToTransfer);
-        return operationSucces;
+    private void transfer(Account otherAccount,double amountToTransfer) throws Exception {
+        if (!isItRegister) throw new UnregisteredAccount();
+        otherAccount.deposit(amountToTransfer);
+        this.withdraw(amountToTransfer);
+    }
+
+    public void transfer(long otherAccountCbu, double amountToTransfer) throws Exception {
+        Account otherAccount = BankingSystem.getInstance().getAccountByCBU(otherAccountCbu);
+        this.transfer(otherAccount, amountToTransfer);
+    }
+
+    public void transfer(String otherAccountAlias, double amountToTransfer) throws Exception {
+        Account otherAccount = BankingSystem.getInstance().getAccountByAlias(otherAccountAlias);
+        this.transfer(otherAccount, amountToTransfer);
     }
 
     public String getAlias() {
         return alias;
+    }
+
+    public void register() {
+        isItRegister = true;
+    }
+
+    public void cancel() {
+        isItRegister = false;
     }
 }
