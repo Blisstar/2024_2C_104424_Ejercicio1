@@ -60,15 +60,15 @@ public class ClientTest {
 
     @Test
     void defaultConstructorInitializeWithInvalidDNIGiveAnError() throws Exception {
-        assertThrows(IncorrectDNI.class, () -> {
+        assertThrows(InvalidDNI.class, () -> {
             Client client1 = new Client("ABCDFGH1", "FF", "G", LocalDate.of(2000, 1, 1), address);
         });
 
-        assertThrows(IncorrectDNI.class, () -> {
+        assertThrows(InvalidDNI.class, () -> {
             Client client2 = new Client("123456", "FF", "G", LocalDate.of(2000, 1, 1), address);
         });
 
-        assertThrows(IncorrectDNI.class, () -> {
+        assertThrows(InvalidDNI.class, () -> {
             Client client3 = new Client("123456789", "FF", "G", LocalDate.of(2000, 1, 1), address);
         });
 

@@ -10,9 +10,9 @@ public class Client {
     private LocalDate marriageDate;
     private Address address;
 
-    public Client(String dni, String lastName, String firstName, LocalDate birthDate, Address address) throws IncorrectDNI {
-        if (dni.length() != 7 && dni.length() != 8) throw new IncorrectDNI();
-        if (!dni.matches("\\d+")) throw new IncorrectDNI();
+    public Client(String dni, String lastName, String firstName, LocalDate birthDate, Address address) throws InvalidDNI {
+        if (dni.length() != 7 && dni.length() != 8) throw new InvalidDNI();
+        if (!dni.matches("\\d+")) throw new InvalidDNI();
         this.DNI = dni;
         this.lastName = lastName;
         this.firstName = firstName;

@@ -52,4 +52,9 @@ public class BankingSystem {
         if (clients.containsKey(dni)) throw new ClientAlreadyExists();
         clients.put(dni, new Client(dni, lastName, firstName, birtDate, address));
     }
+
+    public Client getClient(String dni) throws Exception {
+        if (!clients.containsKey(dni)) throw new ThereIsNoClientWithThatDNI();
+        return clients.get(dni);
+    }
 }
