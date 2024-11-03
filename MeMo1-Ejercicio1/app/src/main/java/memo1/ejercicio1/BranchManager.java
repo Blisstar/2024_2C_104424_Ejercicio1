@@ -6,8 +6,11 @@ public class BranchManager {
         BankingSystem.getInstance().registerBranch(branch);
     }
 
-    public void modifyDenominationOfABranch(int i, String string) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modifyDenominationOfABranch'");
+    public void modifyDenominationOfABranch(int branchNumber, String newDenomination) throws NonexistentBranch {
+        BankingSystem.getInstance().getBranch(branchNumber).setDenomination(newDenomination);
+    }
+
+    public void modifyAddressOfABranch(int branchNumber, Address address) throws NonexistentBranch {
+        BankingSystem.getInstance().getBranch(branchNumber).setAddress(address);
     }
 }

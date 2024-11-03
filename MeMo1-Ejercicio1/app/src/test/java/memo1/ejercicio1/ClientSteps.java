@@ -8,14 +8,11 @@ import io.cucumber.java.en.*;
 
 import java.time.LocalDate;
 
-// Pruebas funcionales basadas en los escenarios Gherkin
-
 public class ClientSteps {
     private Address address;
     private String registeredLastName;
     private String unregisteredLastName;
     private String registeredDNI;
-    private String birthDate;
     private String marriageDate;
     private boolean invalidDNI;
     private boolean clientAlreadyExists;
@@ -66,7 +63,6 @@ public class ClientSteps {
     @Given("a client with DNI {string} and date of birth {string} and the banking system")
     public void createClientWithDNIAndBirthDate(String dni, String bDate) throws Exception{
         registeredDNI = dni;
-        birthDate = bDate;
         BankingSystem.getInstance().registerClient(dni, "F", "J", stringToDate(bDate), address);
     }
 

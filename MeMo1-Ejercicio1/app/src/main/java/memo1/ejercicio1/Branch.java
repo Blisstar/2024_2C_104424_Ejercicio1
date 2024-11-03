@@ -22,5 +22,13 @@ public class Branch {
     public String getAddress(){
         return address.toString();
     }
+
+    public void setDenomination(String denomination) {
+        this.denomination = denomination;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
     
 }

@@ -7,8 +7,6 @@ import io.cucumber.java.en.*;
 
 import java.util.Random;
 
-// Pruebas funcionales basadas en los escenarios Gherkin
-
 public class AccountSteps {
     private Account account;
     private Account accountA;
