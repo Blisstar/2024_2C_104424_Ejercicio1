@@ -1,12 +1,22 @@
 package memo1.ejercicio1;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // Pruebas unitarias
 
 class AccountTest {
+    private Address address;
+    private Branch branch;
+
+    @BeforeEach
+    public void setUp(){
+        address = new Address("Argentina", "Buenos Aires", "CABA", "Calle 117", 158);
+        branch = new Branch(1, "Suc. Belgrano", address);
+    }
 
     @AfterEach
     public void tearDown() {
@@ -29,7 +39,7 @@ class AccountTest {
         Account accountA = new Account(123456789L, "alias1", 1000);
         Account accountB = new Account(987654321L, "alias2", 0);
 
-        accountB.register();
+        accountB.register(branch);
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
 
@@ -58,7 +68,7 @@ class AccountTest {
     @Test
     void depositShouldIncreaseBalance() throws UnregisteredAccount {
         Account account = new Account(123456789L, "alias");
-        account.register();
+        account.register(branch);
         account.deposit(50.0);
         assertEquals(50.0, account.getBalance());
     }
@@ -66,7 +76,7 @@ class AccountTest {
     @Test
     void depositShouldReturnFalseForNegativeAmount() {
         Account account = new Account(123456789L, "alias");
-        account.register();
+        account.register(branch);
         assertThrows(IllegalArgumentException.class, () -> {
             account.deposit(-10.0);
         });
@@ -75,7 +85,7 @@ class AccountTest {
     @Test
     void withdrawShouldDecreaseBalance() throws Exception {
         Account account = new Account(123456789L, "alias",100.0);
-        account.register();
+        account.register(branch);
         account.withdraw(50.0);
         assertEquals(50.0, account.getBalance());
     }
@@ -83,7 +93,7 @@ class AccountTest {
     @Test
     void withdrawShouldReturnFalseIfAmountExceedsBalance() throws Exception {
         Account account = new Account(123456789L, "alias",100.0);
-        account.register();
+        account.register(branch);
         assertThrows(InsufficientFunds.class, () -> {
                 account.withdraw(150.0);
         });
@@ -92,7 +102,7 @@ class AccountTest {
     @Test
     void withdrawShouldReturnFalseForNegativeAmount() throws Exception {
         Account account = new Account(123456789L, "alias",100.0);
-        account.register();
+        account.register(branch);
         assertThrows(IllegalArgumentException.class, () -> {
             account.withdraw(-10.0);
         });
@@ -101,7 +111,7 @@ class AccountTest {
     @Test
     void withdrawShouldAllowExactAmount() throws Exception {
         Account account = new Account(123456789L, "alias",100.0);
-        account.register();
+        account.register(branch);
         account.withdraw(100.0);
         assertEquals(0.0, account.getBalance());
     }
@@ -113,8 +123,8 @@ class AccountTest {
 
         BankingSystem.getInstance().addAccount(senderAccount);
         BankingSystem.getInstance().addAccount(receiverAccount);
-        senderAccount.register();
-        receiverAccount.register();
+        senderAccount.register(branch);
+        receiverAccount.register(branch);
 
         senderAccount.transfer(987654321L, 700.0);
         assertEquals(300.0, senderAccount.getBalance());
@@ -127,8 +137,8 @@ class AccountTest {
 
         BankingSystem.getInstance().addAccount(senderAccount);
         BankingSystem.getInstance().addAccount(receiverAccount);
-        senderAccount.register();
-        receiverAccount.register();
+        senderAccount.register(branch);
+        receiverAccount.register(branch);
 
         senderAccount.transfer(987654321L, 555.0);
         assertEquals(555.0, receiverAccount.getBalance());

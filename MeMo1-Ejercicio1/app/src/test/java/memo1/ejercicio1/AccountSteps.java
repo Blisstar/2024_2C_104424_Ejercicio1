@@ -2,6 +2,7 @@ package memo1.ejercicio1;
 
 import static org.junit.Assert.*;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 
 import java.util.Random;
@@ -19,22 +20,31 @@ public class AccountSteps {
     private boolean isItNonexistentAlias;
     private boolean isThereUnregisteredAccount;
 
+    private Address address;
+    private Branch branch;
+
+    @Before
+    public void beforeScenario(){
+        address = new Address("Argentina", "Buenos Aires", "CABA", "Calle 117", 158);
+        branch = new Branch(1, "Suc. Belgrano", address);
+    }
+
     @Given("I create an account with CBU {long}")
     public void createAccountWithDefaultBalance(long cbu) {
         account = new Account(cbu, "alias");
-        account.register();
+        account.register(branch);
     }
 
     @Given("I create an account with CBU {long} and a balance of {double}")
     public void createAccountWithInitialBalance(long cbu, double balance) {
         account = new Account(cbu, "alias", balance);
-        account.register();
+        account.register(branch);
     }
 
     @Given("An account with CBU {long} and a balance of {double}")
     public void anAccountWithCBUAndBalance(long cbu, double balance) {
         account = new Account(cbu, "alias", balance);
-        account.register();
+        account.register(branch);
     }
 
     @Given("An account A with CBU {long} and a balance of {double}, an account B with CBU {long} and a balance of {double} and a nonexistent CBU")
@@ -44,8 +54,8 @@ public class AccountSteps {
         accountB = new Account(cbuB, "alias2", balanceB);
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountA.register();
-        accountB.register();
+        accountA.register(branch);
+        accountB.register(branch);
         usingCBU = true;
     }
 
@@ -56,8 +66,8 @@ public class AccountSteps {
         accountB = new Account(987654321L, aliasB, balanceB);
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountA.register();
-        accountB.register();
+        accountA.register(branch);
+        accountB.register(branch);
         usingCBU = false;
     }
 
@@ -67,7 +77,7 @@ public class AccountSteps {
         accountB = new Account(cbuB, "alias2");
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountB.register();
+        accountB.register(branch);
     }
 
     @Given("an account A with CBU {long} and a balance of {double} and an unregistered account B with CBU {int}")
@@ -76,36 +86,36 @@ public class AccountSteps {
         accountB = new Account(cbuB, "alias2");
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountA.register();
+        accountA.register(branch);
     }
 
     @When("I deposit {double} into the account")
     @When("I try to deposit {double} into the account")
-    public void depositIntoAccount(double amount) {
+    public void depositIntoAccount(double amount) throws UnregisteredAccount {
         negativeAmount = false;
         try {
             account.deposit(amount);
         } catch (IllegalArgumentException e) {
             negativeAmount = true;
-        } catch (UnregisteredAccount ignored) {}
+        }
     }
 
     @When("I withdraw {double} from the account")
     @When("I try to withdraw {double} from the account")
-    public void withdrawFromAccount(double amount){
+    public void withdrawFromAccount(double amount) throws Exception{
         insufficientFunds = false;
         try {
             account.withdraw(amount);
         } catch (InsufficientFunds e){
             insufficientFunds = true;
-        } catch (Exception ignored) {}
+        }
     }
 
     @When("account A try to transfer {double} to account B using CBU")
     @When("account A transfer {double} to account B using CBU")
     @When("account A transfer {double} to account B using alias")
     @When("account A transfer {double} to account B")
-    public void transferFromAAccountToOtherAccount(double amount) {
+    public void transferFromAAccountToOtherAccount(double amount) throws Exception {
         negativeAmount = false;
         insufficientFunds = false;
         isThereUnregisteredAccount = false;
@@ -121,12 +131,12 @@ public class AccountSteps {
             negativeAmount = true;
         }catch (UnregisteredAccount e) {
             isThereUnregisteredAccount = true;
-        } catch (Exception ignored) {}
+        }
     }
 
     @When("account A try to transfer {double} to account B but enter a nonexistent CBU")
     @When("account A try to transfer {double} to account B but enter a nonexistent Alias")
-    public void accountTryToTransferToAAccountButEnterAnNonexistentCBU(double amount) {
+    public void accountTryToTransferToAAccountButEnterAnNonexistentCBU(double amount) throws Exception {
         isItNonexistentCBU = false;
         isItNonexistentAlias = true;
         Random random = new Random();
@@ -151,7 +161,7 @@ public class AccountSteps {
             isItNonexistentCBU = true;
         }catch (ThereIsNoAccountWithThatAlias e){
             isItNonexistentAlias = true;
-        } catch (Exception ignored) {}
+        }
     }
 
     @Then("The account balance should be {double}")

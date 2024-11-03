@@ -25,18 +25,18 @@ public class ClientSteps {
 
     @Given("client register his data \\(last name, first name, date of birth and address) with DNI {string} in the bank")
     @Given("client try to register his data and puts an invalid DNI {string}")
-    public void createClientWithDNI(String dni) {   
+    public void createClientWithDNI(String dni) throws Exception {   
         invalidDNI = false;
         try {
             BankingSystem.getInstance().registerClient(dni, "F", "J", LocalDate.of(2000, 6, 19), address);
         } catch (InvalidDNI e) {
             invalidDNI = true;
-        }catch (Exception ignored){}     
+        }   
         
     }
 
     @Given("client try to register his data and put in a DNI {string} already registered in the banking system")
-    public void createClientWithDNIAlreadyExistentInTheSystem(String dni) {
+    public void createClientWithDNIAlreadyExistentInTheSystem(String dni) throws Exception {
         clientAlreadyExists = false;
         registeredLastName = "Fernandez";
         unregisteredLastName = "F";
@@ -46,7 +46,7 @@ public class ClientSteps {
             BankingSystem.getInstance().registerClient(dni, unregisteredLastName, "J", LocalDate.of(2000, 6, 19), address);
         }catch (ClientAlreadyExists e) {
             clientAlreadyExists = true;
-        } catch (Exception ignored){}
+        }
         
     }
 

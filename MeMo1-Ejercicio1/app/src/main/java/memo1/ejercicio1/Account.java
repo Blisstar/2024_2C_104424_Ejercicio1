@@ -4,11 +4,12 @@ public class Account {
     private Long cbu;
     private String alias;
     private double balance;
-    private boolean isItRegister;
+    private Branch branch;
 
     public Account(Long cbu, String alias) {
         this.cbu = cbu;
         this.alias = alias;
+        branch = null;
     }
 
     public Account(Long cbu, String alias, double balance) {
@@ -18,6 +19,7 @@ public class Account {
         this.cbu = cbu;
         this.alias = alias;
         this.balance = balance;
+        branch = null;
     }
 
     public void setAlias(String alias) {
@@ -33,21 +35,21 @@ public class Account {
     }
 
     public void withdraw(double amount) throws Exception {
-        if (!isItRegister) throw new UnregisteredAccount();
+        if (branch == null) throw new UnregisteredAccount();
         if (amount <= 0) throw new IllegalArgumentException("Amount cannot be negative or zero.");
         if (amount > balance) throw new InsufficientFunds();
         balance -= amount;
     }
 
     public boolean deposit(double amount) throws UnregisteredAccount {
-        if (!isItRegister) throw new UnregisteredAccount();
+        if (branch == null) throw new UnregisteredAccount();
         if (amount < 0) throw new IllegalArgumentException("Amount cannot be negative.");
         balance += amount;
         return true;
     }
 
     private void transfer(Account otherAccount,double amountToTransfer) throws Exception {
-        if (!isItRegister) throw new UnregisteredAccount();
+        if (branch == null) throw new UnregisteredAccount();
         otherAccount.deposit(amountToTransfer);
         this.withdraw(amountToTransfer);
     }
@@ -66,11 +68,16 @@ public class Account {
         return alias;
     }
 
-    public void register() {
-        isItRegister = true;
+    public void register(Branch assignedBranch) {
+        branch = assignedBranch;
     }
 
     public void cancel() {
-        isItRegister = false;
+        branch = null;
+    }
+
+    public boolean isRadicatedIn(int branchNumber) {
+        if(branch == null) return false;
+        return branchNumber == branch.getNumber();
     }
 }

@@ -2,14 +2,16 @@ package memo1.ejercicio1;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        Address address = new Address("A", "B", "C", "D", 1);
+        Branch branch = new Branch(1, "Suc. Belgrando", address);
 
         // Crear una instancia de Account usando el constructor sin argumentos
         Account account1 = new Account(123456789L,"alias", 1000.0);
-        account1.register();
+        account1.register(branch);
 
         // Crear una instancia de Account usando el constructor con saldo inicial
         Account account2 = new Account(987654321L, "alias", 500.0);
-        account2.register();
+        account2.register(branch);
 
         // Realizar operaciones de depósito y retiro
         account1.deposit(200.0);  // Depositar 200 en la cuenta 1

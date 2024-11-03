@@ -2,6 +2,9 @@ package memo1.ejercicio1;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class BankingSystem {
     private static BankingSystem instance;
@@ -9,11 +12,19 @@ public class BankingSystem {
     private HashMap<Long, Account> accounts;
     private HashMap<String, Long> cbuByAlias;
     private HashMap<String, Client> clients;
+    private HashMap<Integer, Branch> branchs;
+
+    private Set<Long> generatedCBUs;
+    private Random random;
     
     private BankingSystem() {
         accounts = new HashMap<>();
         cbuByAlias = new HashMap<>();
         clients = new HashMap<>();
+        branchs = new HashMap<>();
+
+        generatedCBUs = new HashSet<>();
+        random = new Random();
     }
 
     public static BankingSystem getInstance() {
@@ -56,5 +67,25 @@ public class BankingSystem {
     public Client getClient(String dni) throws Exception {
         if (!clients.containsKey(dni)) throw new ThereIsNoClientWithThatDNI();
         return clients.get(dni);
+    }
+
+    public void registerBranch(Branch branch) throws BranchAlreadyExists {
+        if (branchs.containsKey(branch.getNumber())) throw new BranchAlreadyExists();
+        branchs.put(branch.getNumber(), branch);
+    }
+
+    public Branch getBranch(int branchNumber) throws NonexistentBranch {
+        if (!branchs.containsKey(branchNumber)) throw new NonexistentBranch();
+        return branchs.get(branchNumber);
+    }
+
+    public Long generateNextCBU(){
+        int newSize = generatedCBUs.size() + 1;
+        Long newCBU = 0L;
+        do {
+            newCBU = random.nextLong();
+            generatedCBUs.add(newCBU);
+        } while (generatedCBUs.size() != newSize);
+        return newCBU;
     }
 }
