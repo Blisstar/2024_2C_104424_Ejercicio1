@@ -21,7 +21,7 @@ public class ClientTest {
         assertEquals("42657569", client.getDNI());
         assertEquals("Fernandez", client.getLastName());
         assertEquals("Joel", client.getFirstName());
-        assertEquals(LocalDate.of(2000,6,19), client.getBirthDate());
+        assertEquals(LocalDate.of(2000,6,19).toString(), client.getBirthDate());
         assertEquals(address.toString(), client.getAddress());
     }
 
@@ -36,7 +36,7 @@ public class ClientTest {
         Client client = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
         client.setAsMarriedWithMarriageDate(LocalDate.of(2022,1,1));
         assertTrue(client.isItMarried());
-        assertEquals(LocalDate.of(2022,1,1), client.getMarriageDate());
+        assertEquals(LocalDate.of(2022,1,1).toString(), client.getMarriageDate());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ClientTest {
         Client client = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
         client.setAsMarriedWithMarriageDate(LocalDate.of(2022,1,1));
         assertTrue(client.isItMarried());
-        assertEquals(LocalDate.of(2022,1,1), client.getMarriageDate());
+        assertEquals(LocalDate.of(2022,1,1).toString(), client.getMarriageDate());
         client.setAsSingle();
         assertFalse(client.isItMarried());
         assertThrows(ClientIsntMarried.class, client::getMarriageDate);

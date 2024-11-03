@@ -38,8 +38,8 @@ public class Client {
         return firstName;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public String getBirthDate() {
+        return birthDate.toString();
     }
 
     public Boolean isItMarried() {
@@ -53,11 +53,11 @@ public class Client {
         this.marriageDate = marriageDate;
     }
 
-    public LocalDate getMarriageDate() throws ClientIsntMarried {
+    public String getMarriageDate() throws ClientIsntMarried {
         if (marriageDate == null) {
             throw new ClientIsntMarried();
         }
-        return marriageDate;
+        return marriageDate.toString();
     }
 
     public void setAsSingle() {

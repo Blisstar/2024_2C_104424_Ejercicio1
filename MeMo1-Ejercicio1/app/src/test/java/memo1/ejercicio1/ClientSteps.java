@@ -15,8 +15,21 @@ public class ClientSteps {
     private String registeredLastName;
     private String unregisteredLastName;
     private String registeredDNI;
+    private String birthDate;
+    private String marriageDate;
     private boolean invalidDNI;
     private boolean clientAlreadyExists;
+    private boolean marriageDateIsBeforeBirthDate;
+
+    private LocalDate stringToDate(String date) {
+        String[] split = date.split("-");
+
+        int year = Integer.parseInt(split[0]);
+        int month = Integer.parseInt(split[1]);
+        int day = Integer.parseInt(split[2]);
+
+        return LocalDate.of(year, month, day);
+    }
 
     @Before
     public void beforeScenario(){
@@ -50,6 +63,25 @@ public class ClientSteps {
         
     }
 
+    @Given("a client with DNI {string} and date of birth {string} and the banking system")
+    public void createClientWithDNIAndBirthDate(String dni, String bDate) throws Exception{
+        registeredDNI = dni;
+        birthDate = bDate;
+        BankingSystem.getInstance().registerClient(dni, "F", "J", stringToDate(bDate), address);
+    }
+
+    @When("the system registers that the client is married with marriage date {string}")
+    public void registerIfClientIsMarried(String mDate) throws MarriageDateCantBeBeforeBirth, Exception{
+        marriageDate = mDate;
+        marriageDateIsBeforeBirthDate = false;
+        try {
+            BankingSystem.getInstance().getClient(registeredDNI).setAsMarriedWithMarriageDate(stringToDate(mDate));
+        } catch (MarriageDateCantBeBeforeBirth e) {
+            marriageDateIsBeforeBirthDate = true;
+        }
+        
+    }
+
     @Then("the client with DNI {string} is in the System")
     public void verifyClientIsInTheSystem(String dni) {
         assertDoesNotThrow(() -> BankingSystem.getInstance().getClient(dni));
@@ -74,5 +106,26 @@ public class ClientSteps {
     public void verifyReplacedClient() throws Exception{
         assertEquals(registeredLastName, BankingSystem.getInstance().getClient(registeredDNI).getLastName());
         assertNotEquals(unregisteredLastName, BankingSystem.getInstance().getClient(registeredDNI).getLastName());
-    } 
+    }
+
+    @Then("it is stored in the system if the client is married")
+    public void verifyIsItMarried() throws Exception{
+        assertTrue(BankingSystem.getInstance().getClient(registeredDNI).isItMarried());
+    }
+
+    @Then("the date of marriage is recorded.")
+    public void verifyMarriageDateIsCorrect() throws ClientIsntMarried, Exception{
+        assertEquals(marriageDate, BankingSystem.getInstance().getClient(registeredDNI).getMarriageDate());
+    }
+
+    @Then("the operation is denied due to marriage date is before date of birth")
+    public void verifyMarriageDateIsBeforeBirthDate(){
+        assertTrue(marriageDateIsBeforeBirthDate);
+    }
+
+    @Then("the client is not set as married.")
+    public void verifyIsItNotMarried() throws Exception{
+        assertFalse(BankingSystem.getInstance().getClient(registeredDNI).isItMarried());
+    }
+
 }
