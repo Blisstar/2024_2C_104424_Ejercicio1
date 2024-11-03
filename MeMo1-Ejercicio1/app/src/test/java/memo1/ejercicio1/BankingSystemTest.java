@@ -12,10 +12,11 @@ import java.time.LocalDate;
 
 public class BankingSystemTest {
     private Account account;
+    private Address address;
 
     @BeforeEach
     public void setUp() throws Exception {
-        //Address address = new Address("A", "B", "C", "Dorrego", 987);
+        address = new Address("A", "B", "C", "Dorrego", 987);
         account = new Account(123456789L, "alias");
         BankingSystem.getInstance().addAccount(account);
     }
@@ -81,5 +82,39 @@ public class BankingSystemTest {
         assertThrows(ClientAlreadyExists.class, () -> {
             BankingSystem.getInstance().registerClient("42657569","Fernandez", "Joel", LocalDate.of(2000, 6, 19), address);
         });
+    }
+
+    @Test
+    void registerBranchWorksCorrectly(){
+        Branch branch = new Branch(123,"Suc Belgrano", address);
+        
+        assertDoesNotThrow(() -> {
+            BankingSystem.getInstance().registerBranch(branch);
+        });
+
+    }
+
+    @Test
+    void registerABranchThatAlreadyExistsThrowsException(){
+        Branch branch = new Branch(123,"Suc Belgrano", address);
+        
+        assertThrows(BranchAlreadyExists.class ,() -> {
+            BankingSystem.getInstance().registerBranch(branch);
+            BankingSystem.getInstance().registerBranch(branch);
+        });
+        
+    }
+
+    @Test
+    void getBranchWorksCorrectly() throws Exception {
+        Branch branch = new Branch(123,"Suc Belgrano", address);
+        BankingSystem.getInstance().registerBranch(branch);
+
+        assertEquals(branch, BankingSystem.getInstance().getBranch(branch.getNumber()));
+    }
+
+    @Test
+    void getBranchOfNonexistentBranchThrowsException() throws Exception {
+        assertThrows(NonexistentBranch.class, () -> BankingSystem.getInstance().getBranch(123));
     }
 }
