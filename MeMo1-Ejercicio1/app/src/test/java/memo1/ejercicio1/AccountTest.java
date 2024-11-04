@@ -1,78 +1,146 @@
 package memo1.ejercicio1;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // Pruebas unitarias
 
 class AccountTest {
+    private Address address;
+    private Branch branch;
+
+    @BeforeEach
+    public void setUp(){
+        address = new Address("Argentina", "Buenos Aires", "CABA", "Calle 117", 158);
+        branch = new Branch(1, "Suc. Belgrano", address);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        BankingSystem.resetInstance();
+    }
 
     @Test
-    void defaultConstructorShouldInitializeBalanceToZero() {
-        Account account = new Account();
+    void constructorWithoutBalanceShouldInitializeBalanceToZero() {
+        Account account = new Account(123456789L, "alias");
         assertEquals(0.0, account.getBalance());
     }
 
     @Test
-    void constructorShouldSetBalanceCorrectly() {
-        Account account = new Account(100.0);
-        assertEquals(100.0, account.getBalance());
-    }
-
-    @Test
     void constructorShouldThrowExceptionIfBalanceIsNegative() {
-        assertThrows(IllegalArgumentException.class, () -> new Account(-50.0));
+        assertThrows(IllegalArgumentException.class, () -> new Account(123456789L, "alias",-50.0));
     }
 
     @Test
-    void constructorWithCbuShouldInitializeCorrectly() {
-        Account account = new Account(123456789L, 100.0);
+    void registerWorksCorrectly() throws Exception {
+        Account accountA = new Account(123456789L, "alias1", 1000);
+        Account accountB = new Account(987654321L, "alias2", 0);
+
+        accountB.register(branch);
+        BankingSystem.getInstance().addAccount(accountA);
+        BankingSystem.getInstance().addAccount(accountB);
+
+        assertThrows(UnregisteredAccount.class, () -> accountA.withdraw(10));
+        assertThrows(UnregisteredAccount.class, () -> accountA.deposit(300));
+        assertThrows(UnregisteredAccount.class, () -> accountA.transfer(accountB.getCbu(),50));
+        assertThrows(UnregisteredAccount.class, () -> accountA.transfer(accountB.getAlias(),500));
+    }
+
+    @Test
+    void constructorWithoutBalanceShouldInitializeCorrectly() {
+        Account account = new Account(123456789L, "alias");
         assertEquals(123456789L, account.getCbu());
+        assertEquals("alias", account.getAlias());
+        assertEquals(0.0, account.getBalance());
+    }
+
+    @Test
+    void constructorWithBalanceShouldInitializeCorrectly() {
+        Account account = new Account(123456789L, "alias", 100.0);
+        assertEquals(123456789L, account.getCbu());
+        assertEquals("alias", account.getAlias());
         assertEquals(100.0, account.getBalance());
     }
 
     @Test
-    void setBalanceShouldThrowExceptionIfBalanceIsNegative() {
-        Account account = new Account();
-        assertThrows(IllegalArgumentException.class, () -> account.setBalance(-1.0));
-    }
-
-    @Test
-    void depositShouldIncreaseBalance() {
-        Account account = new Account();
+    void depositShouldIncreaseBalance() throws UnregisteredAccount {
+        Account account = new Account(123456789L, "alias");
+        account.register(branch);
         account.deposit(50.0);
         assertEquals(50.0, account.getBalance());
     }
 
     @Test
     void depositShouldReturnFalseForNegativeAmount() {
-        Account account = new Account();
-        assertFalse(account.deposit(-10.0));
+        Account account = new Account(123456789L, "alias");
+        account.register(branch);
+        assertThrows(IllegalArgumentException.class, () -> {
+            account.deposit(-10.0);
+        });
     }
 
     @Test
-    void withdrawShouldDecreaseBalance() {
-        Account account = new Account(100.0);
-        assertTrue(account.withdraw(50.0));
+    void withdrawShouldDecreaseBalance() throws Exception {
+        Account account = new Account(123456789L, "alias",100.0);
+        account.register(branch);
+        account.withdraw(50.0);
         assertEquals(50.0, account.getBalance());
     }
 
     @Test
-    void withdrawShouldReturnFalseIfAmountExceedsBalance() {
-        Account account = new Account(100.0);
-        assertFalse(account.withdraw(150.0));
+    void withdrawShouldReturnFalseIfAmountExceedsBalance() throws Exception {
+        Account account = new Account(123456789L, "alias",100.0);
+        account.register(branch);
+        assertThrows(InsufficientFunds.class, () -> {
+                account.withdraw(150.0);
+        });
     }
 
     @Test
-    void withdrawShouldReturnFalseForNegativeAmount() {
-        Account account = new Account(100.0);
-        assertFalse(account.withdraw(-10.0));
+    void withdrawShouldReturnFalseForNegativeAmount() throws Exception {
+        Account account = new Account(123456789L, "alias",100.0);
+        account.register(branch);
+        assertThrows(IllegalArgumentException.class, () -> {
+            account.withdraw(-10.0);
+        });
     }
 
     @Test
-    void withdrawShouldAllowExactAmount() {
-        Account account = new Account(100.0);
-        assertTrue(account.withdraw(100.0));
+    void withdrawShouldAllowExactAmount() throws Exception {
+        Account account = new Account(123456789L, "alias",100.0);
+        account.register(branch);
+        account.withdraw(100.0);
         assertEquals(0.0, account.getBalance());
+    }
+
+    @Test
+    void transferShouldDecreaseBalanceOfSenderAccount() throws Exception {
+        Account senderAccount = new Account(123456789L, "alias1", 1000.0);
+        Account receiverAccount = new Account(987654321L, "alias2", 0.0);
+
+        BankingSystem.getInstance().addAccount(senderAccount);
+        BankingSystem.getInstance().addAccount(receiverAccount);
+        senderAccount.register(branch);
+        receiverAccount.register(branch);
+
+        senderAccount.transfer(987654321L, 700.0);
+        assertEquals(300.0, senderAccount.getBalance());
+    }
+
+    @Test
+    void transferShouldIncreaseBalanceOfReceiverAccount() throws Exception {
+        Account senderAccount = new Account(123456789L, "alias1", 800.0);
+        Account receiverAccount = new Account(987654321L, "alias2", 0.0);
+
+        BankingSystem.getInstance().addAccount(senderAccount);
+        BankingSystem.getInstance().addAccount(receiverAccount);
+        senderAccount.register(branch);
+        receiverAccount.register(branch);
+
+        senderAccount.transfer(987654321L, 555.0);
+        assertEquals(555.0, receiverAccount.getBalance());
     }
 }
