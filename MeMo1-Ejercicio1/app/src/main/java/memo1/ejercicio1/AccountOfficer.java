@@ -17,7 +17,7 @@ public class AccountOfficer {
         BankingSystem.getInstance().addAccount(account);
         account.register(assignedBranch);
 
-        ownerClient.setMainAccount(account);
+        ownerClient.setMainAccountCBU(account);
         if (coownerClientsDNI != null){
             for (String dni : coownerClientsDNI) {
                 Client coownerClient = BankingSystem.getInstance().getClient(dni);

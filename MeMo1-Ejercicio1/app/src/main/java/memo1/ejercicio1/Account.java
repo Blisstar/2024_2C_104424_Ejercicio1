@@ -82,6 +82,7 @@ public class Account {
     }
 
     public void addCoowner(Client client, String coownerDNI) throws Exception {
+        if (branch == null) throw new UnregisteredAccount();
         if (!client.isYourMainAccount(cbu)) throw new YouDontHavePermissions();
         Client coowner = BankingSystem.getInstance().getClient(coownerDNI);
         coowner.addSecundaryAccount(this);

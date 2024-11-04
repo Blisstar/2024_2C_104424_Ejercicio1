@@ -1,7 +1,7 @@
 package memo1.ejercicio1;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Client {
     private String DNI;
@@ -10,8 +10,8 @@ public class Client {
     private LocalDate birthDate;
     private LocalDate marriageDate;
     private Address address;
-    private Account mainAccount;
-    private ArrayList<Account> secundaryAccounts;
+    private Long mainAccountCBU;
+    private HashMap<Long, Account> accounts;
 
     public Client(String dni, String lastName, String firstName, LocalDate birthDate, Address address) throws InvalidDNI {
         if (dni.length() != 7 && dni.length() != 8) throw new InvalidDNI();
@@ -22,8 +22,8 @@ public class Client {
         this.birthDate = birthDate;
         this.address = address;
         marriageDate = null;
-        mainAccount = null;
-        secundaryAccounts = new ArrayList<>();
+        mainAccountCBU = null;
+        accounts = new HashMap<>();
     }
 
     public String getDNI() {
@@ -68,33 +68,33 @@ public class Client {
         return address.toString();
     }
 
-    public void setMainAccount(Account account) {
-        mainAccount = account;
+    public void setMainAccountCBU(Account account) {
+        mainAccountCBU = account.getCbu();
+        accounts.put(mainAccountCBU, account);
     }
 
     public boolean doItHaveMainAccount(){
-        return mainAccount != null;
+        return mainAccountCBU != null;
     }
 
     public void addSecundaryAccount(Account account) {
-        secundaryAccounts.add(account);
+        accounts.put(account.getCbu(), account);
     }
 
     public void addCoownerToMainAccount(String coownerDNI) throws Exception {
-        mainAccount.addCoowner(this, coownerDNI);
+        accounts.get(mainAccountCBU).addCoowner(this, coownerDNI);
     }
 
     public boolean isYourMainAccount(Long cbu) {
-        return (mainAccount != null) && (cbu == mainAccount.getCbu());
+        return (mainAccountCBU != null) && (cbu == mainAccountCBU);
     }
 
     public boolean isYourAccount(Long cbu) {
-        if (isYourMainAccount(cbu)) return true;
-        for (Account account : secundaryAccounts) {
-            if (account.getCbu().equals(cbu)) {
-                return true;
-            }
-        }
-        return false;
+        return accounts.containsKey(cbu);
+    }
+
+    public Account getAccount(Long cbu) throws YouDontHavePermissions {
+        if (!isYourAccount(cbu)) throw new YouDontHavePermissions();
+        return accounts.get(cbu);
     }
 }
