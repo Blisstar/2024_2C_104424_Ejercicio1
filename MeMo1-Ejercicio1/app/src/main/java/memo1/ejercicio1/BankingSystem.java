@@ -16,6 +16,9 @@ public class BankingSystem {
 
     private Set<Long> generatedCBUs;
     private Random random;
+
+    private int nextTransactionNumber;
+    private int nextIDEmployee;
     
     private BankingSystem() {
         accounts = new HashMap<>();
@@ -25,6 +28,9 @@ public class BankingSystem {
 
         generatedCBUs = new HashSet<>();
         random = new Random();
+
+        nextTransactionNumber = -1;
+        nextIDEmployee = -1;
     }
 
     public static BankingSystem getInstance() {
@@ -87,5 +93,15 @@ public class BankingSystem {
             generatedCBUs.add(newCBU);
         } while (generatedCBUs.size() != newSize);
         return newCBU;
+    }
+
+    public int generateNextTransactionNumber() {
+        nextTransactionNumber++;
+        return nextTransactionNumber;
+    }
+
+    public int generateNextIDEmployee() {
+        nextIDEmployee++;
+        return nextIDEmployee;
     }
 }
