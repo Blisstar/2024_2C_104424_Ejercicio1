@@ -41,6 +41,7 @@ public class AccountOfficerSteps {
         BankingSystem.getInstance().registerClient(coownerDNI2, "F", "J", LocalDate.of(1971, 1, 1), address);
     }
 
+    @Given("an account officer and a client with DNI {string} and his bank account")
     @Given("an account officer with his branch office and an client DNI {string} who already has an account")
     public void anOwnerWithAnAccount(String ownerDNI) throws Exception{
         BankingSystem.getInstance().registerBranch(branch);
@@ -80,6 +81,11 @@ public class AccountOfficerSteps {
         officer.registerAccount(account.getCbu());
     }
 
+    @When("the officer terminates an account")
+    public void cancellAcount() throws ThereIsNoAccountWithThatAlias{
+        BankingSystem.getInstance().getAccountByAlias(alias).cancel();
+    }
+
     @Then("The account officer automatically registers the account with his branch")
     public void verifyCorrectBranch() {
         assertTrue(account.isRadicatedIn(branch.getNumber()));
@@ -95,5 +101,10 @@ public class AccountOfficerSteps {
     @Then("the operation should be denied for trying to create an account to an client who already has an account")
     public void verifyItAlreadyHasAnAccount(){
         assertTrue(itAlreadyHasAnAcount);
+    }
+
+    @Then("no one can operate the bank account")
+    public void verifyIfNoOneCanOperateWithTerminatedAccount() throws ThereIsNoAccountWithThatAlias {
+        assertFalse(BankingSystem.getInstance().getAccountByAlias(alias).isRegistered());
     }
 }

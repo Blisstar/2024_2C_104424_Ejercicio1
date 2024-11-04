@@ -87,4 +87,8 @@ public class Account {
         Client coowner = BankingSystem.getInstance().getClient(coownerDNI);
         coowner.addSecundaryAccount(this);
     }
+
+    public boolean isRegistered() {
+        return branch != null;
+    }
 }
