@@ -18,4 +18,8 @@ public class BranchManager {
     public void modifyAddressOfABranch(int branchNumber, Address address) throws NonexistentBranch {
         BankingSystem.getInstance().getBranch(branchNumber).setAddress(address);
     }
+
+    public void cancelABranch(int branchNumber) throws NonexistentBranch {
+        BankingSystem.getInstance().getBranch(branchNumber).cancel();
+    }
 }

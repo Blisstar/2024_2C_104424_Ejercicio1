@@ -17,6 +17,7 @@ public class Transaction {
         realizationDateTime = LocalDateTime.now();
         this.firstAccount = firstAccount;
         this.secondAccount = secAccount;
+        BankingSystem.getInstance().addTransaction(this);
     }
 
     public int getNumber() {

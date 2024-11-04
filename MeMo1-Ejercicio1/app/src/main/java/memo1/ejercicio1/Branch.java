@@ -4,11 +4,13 @@ public class Branch {
     private int number;
     private String denomination;
     private Address address;
+    private boolean isCancelled;
 
     public Branch(int number, String denomination, Address address) {
         this.number = number;
         this.denomination = denomination;
         this.address = address;
+        this.isCancelled = false;
     }
 
     public int getNumber(){
@@ -29,6 +31,14 @@ public class Branch {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public void cancel() {
+        this.isCancelled = true;
+    }
+
+    public boolean isCancelled() {
+        return isCancelled;
     }
     
 }

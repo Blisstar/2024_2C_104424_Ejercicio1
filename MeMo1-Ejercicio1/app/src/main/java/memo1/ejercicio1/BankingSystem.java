@@ -1,6 +1,7 @@
 package memo1.ejercicio1;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -17,7 +18,7 @@ public class BankingSystem {
     private Set<Long> generatedCBUs;
     private Random random;
 
-    private int nextTransactionNumber;
+    private ArrayList<Transaction> transactions;
     private int nextIDEmployee;
     
     private BankingSystem() {
@@ -29,7 +30,7 @@ public class BankingSystem {
         generatedCBUs = new HashSet<>();
         random = new Random();
 
-        nextTransactionNumber = -1;
+        transactions = new ArrayList<>();
         nextIDEmployee = -1;
     }
 
@@ -96,12 +97,19 @@ public class BankingSystem {
     }
 
     public int generateNextTransactionNumber() {
-        nextTransactionNumber++;
-        return nextTransactionNumber;
+        return transactions.size();
     }
 
     public int generateNextIDEmployee() {
         nextIDEmployee++;
         return nextIDEmployee;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+    }
+
+    public int getTransactionsCount() {
+        return transactions.size();
     }
 }

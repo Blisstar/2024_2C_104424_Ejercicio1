@@ -5,6 +5,8 @@ import io.cucumber.java.en.*;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
+
 public class BankingSystemSteps{
     private Address address;
     private Branch branch;
@@ -33,7 +35,7 @@ public class BankingSystemSteps{
     }
 
     @When("the bank records the transactions performed by the bank accounts")
-    public void accountsDoTransations(){
+    public void accountsDoTransations() throws Exception{
         account1.deposit(1200);
         account1.withdraw(150);
 
