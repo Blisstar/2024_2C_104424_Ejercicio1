@@ -79,4 +79,22 @@ public class Client {
     public void addSecundaryAccount(Account account) {
         secundaryAccounts.add(account);
     }
+
+    public void addCoownerToMainAccount(String coownerDNI) throws Exception {
+        mainAccount.addCoowner(this, coownerDNI);
+    }
+
+    public boolean isYourMainAccount(Long cbu) {
+        return (mainAccount != null) && (cbu == mainAccount.getCbu());
+    }
+
+    public boolean isYourAccount(Long cbu) {
+        if (isYourMainAccount(cbu)) return true;
+        for (Account account : secundaryAccounts) {
+            if (account.getCbu().equals(cbu)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

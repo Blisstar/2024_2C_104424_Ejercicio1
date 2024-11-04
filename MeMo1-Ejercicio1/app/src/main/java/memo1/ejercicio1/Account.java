@@ -80,4 +80,10 @@ public class Account {
         if(branch == null) return false;
         return branchNumber == branch.getNumber();
     }
+
+    public void addCoowner(Client client, String coownerDNI) throws Exception {
+        if (!client.isYourMainAccount(cbu)) throw new YouDontHavePermissions();
+        Client coowner = BankingSystem.getInstance().getClient(coownerDNI);
+        coowner.addSecundaryAccount(this);
+    }
 }

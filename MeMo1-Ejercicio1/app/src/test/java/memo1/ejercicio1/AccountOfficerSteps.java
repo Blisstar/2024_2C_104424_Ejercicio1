@@ -23,14 +23,15 @@ public class AccountOfficerSteps {
     public void beforeScenario() throws Exception {
         address = new Address("Argentina", "Buenos Aires", "CABA", "Calle", 123);
         branch = new Branch(123, "Suc. Belgrano", address);
-        BankingSystem.getInstance().registerBranch(branch);
-        officer = new AccountOfficer(123);
         coownerClients = new ArrayList<>();
         alias = "alias";
     }
 
     @Given("an account officer with his branch, an client holder DNI {string} and two co-owners DNIs {string} , {string}")
     public void ownerAndCoowners(String ownerDNI, String coownerDNI1, String coownerDNI2) throws Exception{
+        BankingSystem.getInstance().registerBranch(branch);
+        officer = new AccountOfficer(123);
+        
         this.ownerDNI = ownerDNI;
         coownerClients.add(coownerDNI1);
         coownerClients.add(coownerDNI2);
@@ -42,6 +43,9 @@ public class AccountOfficerSteps {
 
     @Given("an account officer with his branch office and an client DNI {string} who already has an account")
     public void anOwnerWithAnAccount(String ownerDNI) throws Exception{
+        BankingSystem.getInstance().registerBranch(branch);
+        officer = new AccountOfficer(123);
+
         this.ownerDNI = ownerDNI;
         BankingSystem.getInstance().registerClient(ownerDNI, "F", "J", LocalDate.of(1971, 1, 1), address);
         officer.createAndRegisterAccount(alias, ownerDNI, null);
@@ -49,6 +53,9 @@ public class AccountOfficerSteps {
 
     @Given("an account officer with his branch and an client DNI {string} who has a cancelled account")
     public void anOwnerWithACancelledAccount(String ownerDNI) throws Exception{
+        BankingSystem.getInstance().registerBranch(branch);
+        officer = new AccountOfficer(123);
+
         this.ownerDNI = ownerDNI;
         BankingSystem.getInstance().registerClient(ownerDNI, "F", "J", LocalDate.of(1971, 1, 1), address);
         officer.createAndRegisterAccount(alias, ownerDNI, null);

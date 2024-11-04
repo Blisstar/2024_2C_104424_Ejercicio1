@@ -14,6 +14,9 @@ public class ClientSteps {
     private String unregisteredLastName;
     private String registeredDNI;
     private String marriageDate;
+    private BranchManager manager;
+    private AccountOfficer officer;
+    private Account account;
     private boolean invalidDNI;
     private boolean clientAlreadyExists;
     private boolean marriageDateIsBeforeBirthDate;
@@ -31,6 +34,7 @@ public class ClientSteps {
     @Before
     public void beforeScenario(){
         address = new Address("Argentina", "Buenos Aires", "CABA", "Calle 117", 158);
+        manager = new BranchManager();
     }
 
     @Given("client register his data \\(last name, first name, date of birth and address) with DNI {string} in the bank")
@@ -66,6 +70,14 @@ public class ClientSteps {
         BankingSystem.getInstance().registerClient(dni, "F", "J", stringToDate(bDate), address);
     }
 
+    @Given("a client with DNI {string} and a bank account")
+    public void clientAndMainAccount(String dni) throws Exception{
+        registeredDNI = dni;
+        BankingSystem.getInstance().registerClient(dni, "F", "J", LocalDate.of(2000,1,1), address);
+        manager.registerNewBranch(123, "Suc", address);
+        officer = new AccountOfficer(123);
+    }
+
     @When("the system registers that the client is married with marriage date {string}")
     public void registerIfClientIsMarried(String mDate) throws MarriageDateCantBeBeforeBirth, Exception{
         marriageDate = mDate;
@@ -76,6 +88,12 @@ public class ClientSteps {
             marriageDateIsBeforeBirthDate = true;
         }
         
+    }
+
+    @When("the client is the owner of the bank account")
+    public void registerNewAccountForClient() throws Exception {
+        officer.createAndRegisterAccount("aliasOfOwner", registeredDNI, null);
+        account = BankingSystem.getInstance().getAccountByAlias("aliasOfOwner");
     }
 
     @Then("the client with DNI {string} is in the System")
@@ -124,4 +142,21 @@ public class ClientSteps {
         assertFalse(BankingSystem.getInstance().getClient(registeredDNI).isItMarried());
     }
 
+    @Then("he becomes the one who has the most control over the bank account")
+    public void verifyIfTheClientIsTheAccountHolder() throws Exception{
+        assertTrue(BankingSystem.getInstance().getClient(registeredDNI).isYourMainAccount(account.getCbu()));
+    }
+
+    @Then("the client can add coowners")
+    public void verifyIfClientAddCoownersToItsAccount() throws Exception {
+        String coownerDNI = new StringBuilder(registeredDNI).reverse().toString();
+        BankingSystem.getInstance().registerClient(coownerDNI, "F", "J", LocalDate.of(2000,1,1), address);
+        
+        Client owner = BankingSystem.getInstance().getClient(registeredDNI);
+        owner.addCoownerToMainAccount(coownerDNI);
+        
+        Client coowner = BankingSystem.getInstance().getClient(coownerDNI);
+        assertTrue(coowner.isYourAccount(account.getCbu()));
+        assertFalse(coowner.isYourMainAccount(account.getCbu()));
+    }
 }
