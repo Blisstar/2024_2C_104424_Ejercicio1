@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Pruebas unitarias
-
 class AccountTest {
     private Address address;
     private Branch branch;
