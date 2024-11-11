@@ -39,33 +39,18 @@ public class ClientSteps {
         manager = new BranchManager();
     }
 
-    @Given("client register his data \\(last name, first name, date of birth and address) with DNI {string} in the bank")
-    @Given("client try to register his data and puts an invalid DNI {string}")
-    public void createClientWithDNI(String dni) throws Exception {   
-        invalidDNI = false;
-        try {
-            BankingSystem.getInstance().registerClient(dni, "F", "J", LocalDate.of(2000, 6, 19), address);
-        } catch (InvalidDNI e) {
-            invalidDNI = true;
-        }   
-        
-    }
-
-    @Given("client try to register his data and put in a DNI {string} already registered in the banking system")
-    public void createClientWithDNIAlreadyExistentInTheSystem(String dni) throws Exception {
-        clientAlreadyExists = false;
-        registeredLastName = "Fernandez";
-        unregisteredLastName = "F";
+    @Given("a person with DNI {string} and his data \\(last name, first name, date of birth and address)")
+    public void aPersonWithDNI(String dni) {
         registeredDNI1 = dni;
-        try {
-            BankingSystem.getInstance().registerClient(dni, registeredLastName, "J", LocalDate.of(2000, 6, 19), address);
-            BankingSystem.getInstance().registerClient(dni, unregisteredLastName, "J", LocalDate.of(2000, 6, 19), address);
-        }catch (ClientAlreadyExists e) {
-            clientAlreadyExists = true;
-        }
-        
     }
 
+    @Given("a client with DNI {string} and a person")
+    public void aClientWithDNI(String dni) throws Exception {
+        registeredDNI1 = dni;
+        registeredLastName = "Fernandez";
+        BankingSystem.getInstance().registerClient(dni, registeredLastName, "J", LocalDate.of(2000, 6, 19), address);
+    }
+    
     @Given("a client with DNI {string} and date of birth {string} and the banking system")
     public void createClientWithDNIAndBirthDate(String dni, String bDate) throws Exception{
         registeredDNI1 = dni;
@@ -103,6 +88,34 @@ public class ClientSteps {
         officer = new AccountOfficer(123);
         officer.createAndRegisterAccount("aliasOfOwner", dni1, null);
         account = BankingSystem.getInstance().getAccountByAlias("aliasOfOwner");
+    }
+
+    @When("the person registers as a client at the bank")
+    public void aPersonRegistersAsAClient() throws Exception {
+        BankingSystem.getInstance().registerClient(registeredDNI1, "F", "J", LocalDate.of(2000, 6, 19), address);
+    }
+
+    @When("the person try to registers as a client and puts an invalid DNI {string}")
+    public void createClientWithDNI(String dni) throws Exception {   
+        invalidDNI = false;
+        try {
+            BankingSystem.getInstance().registerClient(dni, "F", "J", LocalDate.of(2000, 6, 19), address);
+        } catch (InvalidDNI e) {
+            invalidDNI = true;
+        }   
+        
+    }
+
+    @When("the person try to registers as a client and puts in a DNI {string} already registered in the banking system")
+    public void createClientWithDNIAlreadyExistentInTheSystem(String dni) throws Exception {
+        clientAlreadyExists = false;
+        unregisteredLastName = "F";
+        try {
+            BankingSystem.getInstance().registerClient(dni, unregisteredLastName, "J", LocalDate.of(2000, 6, 19), address);
+        }catch (ClientAlreadyExists e) {
+            clientAlreadyExists = true;
+        }
+        
     }
 
     @When("the system registers that the client is married with marriage date {string}")
