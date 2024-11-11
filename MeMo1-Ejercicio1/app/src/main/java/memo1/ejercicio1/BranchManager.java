@@ -14,7 +14,11 @@ public class BranchManager {
         BankingSystem.getInstance().getBranch(branchNumber).setAddress(address);
     }
 
-    public void cancelABranch(int branchNumber) throws NonexistentBranch {
+    public void cancelABranch(int branchNumber) throws NonexistentBranch, BranchHasAccountsWithBalance {
         BankingSystem.getInstance().getBranch(branchNumber).cancel();
+    }
+
+    public void cancelABranch(int branchToCancelNumber, int backupBranchNumber) throws NonexistentBranch {
+        BankingSystem.getInstance().getBranch(branchToCancelNumber).cancel(backupBranchNumber);
     }
 }

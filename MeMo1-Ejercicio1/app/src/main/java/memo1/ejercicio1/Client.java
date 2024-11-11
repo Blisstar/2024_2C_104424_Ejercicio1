@@ -12,6 +12,8 @@ public class Client {
     private Address address;
     private Long mainAccountCBU;
     private HashMap<Long, Account> accounts;
+    private Client spouse;
+    private boolean isActive;
 
     public Client(String dni, String lastName, String firstName, LocalDate birthDate, Address address) throws InvalidDNI {
         if (dni.length() != 7 && dni.length() != 8) throw new InvalidDNI();
@@ -23,7 +25,9 @@ public class Client {
         this.address = address;
         marriageDate = null;
         mainAccountCBU = null;
+        spouse = null;
         accounts = new HashMap<>();
+        isActive = true;
     }
 
     public String getDNI() {
@@ -46,13 +50,23 @@ public class Client {
         return marriageDate != null;
     }
 
-    public void setAsMarriedWithMarriageDate(LocalDate marriageDate) throws MarriageDateCantBeBeforeBirth {
+    public void setAsMarriedWithMarriageDate(LocalDate marriageDate, Client spouse) throws MarriageDateCantBeBeforeBirth {
         if (marriageDate.isBefore(birthDate)) {
             throw new MarriageDateCantBeBeforeBirth();
         }
+        this.spouse = spouse;
+        this.marriageDate = marriageDate;
+        spouse.setAsMarriedWithMarriageDateAndSpouse(marriageDate, this);
+            }
+        
+    private void setAsMarriedWithMarriageDateAndSpouse(LocalDate marriageDate, Client spouse) throws MarriageDateCantBeBeforeBirth {
+        if (marriageDate.isBefore(birthDate)) {
+            throw new MarriageDateCantBeBeforeBirth();
+        }
+        this.spouse = spouse;
         this.marriageDate = marriageDate;
     }
-
+        
     public String getMarriageDate() throws ClientIsntMarried {
         if (marriageDate == null) {
             throw new ClientIsntMarried();
@@ -96,5 +110,15 @@ public class Client {
     public Account getAccount(Long cbu) throws YouDontHavePermissions {
         if (!isYourAccount(cbu)) throw new YouDontHavePermissions();
         return accounts.get(cbu);
+    }
+
+    public void cancel() throws ThereIsNoAccountWithThatCBU, AccountStillHasFunds {
+        BankingSystem.getInstance().getAccountByCBU(mainAccountCBU).cancel();
+        accounts.clear();
+        isActive = false;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }

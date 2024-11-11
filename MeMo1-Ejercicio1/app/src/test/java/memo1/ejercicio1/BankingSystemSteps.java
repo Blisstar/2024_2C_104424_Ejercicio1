@@ -55,6 +55,7 @@ public class BankingSystemSteps{
 
     @Then("the withdrawal transaction is recorded in the banking system")
     @Then("the deposit transaction is recorded in the bank")
+    @Then("the transfer transaction is recorded in the bank")
     public void verifyIfTheTransactionWasRecorded() {
         assertEquals(1, BankingSystem.getInstance().getTransactionsCount());
     }

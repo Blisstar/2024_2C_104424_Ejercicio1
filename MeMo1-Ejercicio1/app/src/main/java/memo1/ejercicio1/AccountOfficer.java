@@ -26,7 +26,7 @@ public class AccountOfficer {
         }
     }
 
-    public void cancelAccount(Long cbu) throws ThereIsNoAccountWithThatCBU {
+    public void cancelAccount(Long cbu) throws ThereIsNoAccountWithThatCBU, AccountStillHasFunds {
         BankingSystem.getInstance().getAccountByCBU(cbu).cancel();
     }
 
