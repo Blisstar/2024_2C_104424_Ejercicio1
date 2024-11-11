@@ -5,6 +5,7 @@ Feature: Transferring money
     When account A transfer 200.0 to account B using CBU
     Then The account A balance should be 800.0
     And The account B balance should be 500.0
+    And the transfer transaction is recorded in the bank
 
   Scenario: Cannot transfer more money than available balance
     Given An account A with CBU 123456789 and a balance of 250.0 and other account B with CBU 987654321 and a balance of 400.0
@@ -30,6 +31,7 @@ Feature: Transferring money
     When account A transfer 350.0 to account B using alias
     Then The account A balance should be 250.0
     And The account B balance should be 1150.0
+    And the transfer transaction is recorded in the bank
 
   Scenario: Failed transfer due to nonexistent Alias
     Given An account A with alias "uno.dos.tres" and a balance of 960.0, an account B with alias "tres.dos.uno" and a balance of 1230.0 and a nonexistent Alias

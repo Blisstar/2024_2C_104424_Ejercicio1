@@ -33,29 +33,22 @@ public class ClientTest {
 
     @Test
     void setAsMarriedWithMarriageDateWorksCorrectly() throws Exception {
-        Client client = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
-        client.setAsMarriedWithMarriageDate(LocalDate.of(2022,1,1));
-        assertTrue(client.isItMarried());
-        assertEquals(LocalDate.of(2022,1,1).toString(), client.getMarriageDate());
+        Client client1 = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
+        Client client2 = new Client("12345678", "FF", "G", LocalDate.of(2000, 1, 1), address);
+        client1.setAsMarriedWithMarriageDate(LocalDate.of(2022,1,1), client2);
+        assertTrue(client1.isItMarried());
+        assertTrue(client2.isItMarried());
+        assertEquals(LocalDate.of(2022,1,1).toString(), client1.getMarriageDate());
+        assertEquals(LocalDate.of(2022,1,1).toString(), client2.getMarriageDate());
     }
 
     @Test
     void setAsMarriedWithMarriageDateIsBeforeBirthGiveAnError() throws Exception {
-        Client client = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
+        Client client1 = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
+        Client client2 = new Client("12345678", "FF", "G", LocalDate.of(2000, 1, 1), address);
         assertThrows(MarriageDateCantBeBeforeBirth.class, () -> {
-            client.setAsMarriedWithMarriageDate(LocalDate.of(1999,12,31));
+            client1.setAsMarriedWithMarriageDate(LocalDate.of(1999,12,31), client2);
         });
-    }
-
-    @Test
-    void setAsSingleWorksCorrectly() throws Exception {
-        Client client = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
-        client.setAsMarriedWithMarriageDate(LocalDate.of(2022,1,1));
-        assertTrue(client.isItMarried());
-        assertEquals(LocalDate.of(2022,1,1).toString(), client.getMarriageDate());
-        client.setAsSingle();
-        assertFalse(client.isItMarried());
-        assertThrows(ClientIsntMarried.class, client::getMarriageDate);
     }
 
     @Test

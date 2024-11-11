@@ -87,9 +87,11 @@ public class Account {
 
     public void register(Branch assignedBranch) {
         branch = assignedBranch;
+        branch.addAccount(this);
     }
 
-    public void cancel() {
+    public void cancel() throws AccountStillHasFunds {
+        verifyDoesStillHasFunds();
         branch = null;
     }
 
@@ -112,4 +114,9 @@ public class Account {
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
+
+    public void verifyDoesStillHasFunds() throws AccountStillHasFunds {
+        if (balance > 0) throw new AccountStillHasFunds();
+    }
+
 }

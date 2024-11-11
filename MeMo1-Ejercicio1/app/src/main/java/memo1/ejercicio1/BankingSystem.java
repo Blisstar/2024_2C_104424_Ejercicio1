@@ -19,7 +19,6 @@ public class BankingSystem {
     private Random random;
 
     private ArrayList<Transaction> transactions;
-    private int nextIDEmployee;
     
     private BankingSystem() {
         accounts = new HashMap<>();
@@ -31,7 +30,6 @@ public class BankingSystem {
         random = new Random();
 
         transactions = new ArrayList<>();
-        nextIDEmployee = -1;
     }
 
     public static BankingSystem getInstance() {
@@ -98,11 +96,6 @@ public class BankingSystem {
 
     public int generateNextTransactionNumber() {
         return transactions.size();
-    }
-
-    public int generateNextIDEmployee() {
-        nextIDEmployee++;
-        return nextIDEmployee;
     }
 
     public void addTransaction(Transaction transaction) {

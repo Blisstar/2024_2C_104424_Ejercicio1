@@ -3,12 +3,10 @@ package memo1.ejercicio1;
 import java.util.ArrayList;
 
 public class AccountOfficer {
-    private int idEmployee;
     private Branch assignedBranch;
 
     public AccountOfficer(int branchNumber) throws NonexistentBranch {
         assignedBranch = BankingSystem.getInstance().getBranch(branchNumber);
-        idEmployee = BankingSystem.getInstance().generateNextIDEmployee();
     }
 
     public void createAndRegisterAccount(String alias, String ownerClientDNI, ArrayList<String> coownerClientsDNI) throws Exception {       
@@ -28,7 +26,7 @@ public class AccountOfficer {
         }
     }
 
-    public void cancelAccount(Long cbu) throws ThereIsNoAccountWithThatCBU {
+    public void cancelAccount(Long cbu) throws ThereIsNoAccountWithThatCBU, AccountStillHasFunds {
         BankingSystem.getInstance().getAccountByCBU(cbu).cancel();
     }
 

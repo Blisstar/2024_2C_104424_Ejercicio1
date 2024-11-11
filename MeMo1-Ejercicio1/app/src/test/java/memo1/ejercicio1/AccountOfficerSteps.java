@@ -18,6 +18,7 @@ public class AccountOfficerSteps {
     private String alias;
     private Account account;
     private boolean itAlreadyHasAnAcount;
+    private boolean doesAccountStillHaveFunds;
 
     @Before
     public void beforeScenario() throws Exception {
@@ -52,6 +53,11 @@ public class AccountOfficerSteps {
         officer.createAndRegisterAccount(alias, ownerDNI, null);
     }
 
+    @Given("his balance is {double} ARS")
+    public void setBalanceOfAccount(double balance) throws Exception{
+        BankingSystem.getInstance().getAccountByAlias(alias).deposit(balance);
+    }
+
     @Given("an account officer with his branch and an client DNI {string} who has a cancelled account")
     public void anOwnerWithACancelledAccount(String ownerDNI) throws Exception{
         BankingSystem.getInstance().registerBranch(branch);
@@ -82,8 +88,15 @@ public class AccountOfficerSteps {
     }
 
     @When("the officer terminates an account")
-    public void cancellAcount() throws ThereIsNoAccountWithThatAlias{
-        BankingSystem.getInstance().getAccountByAlias(alias).cancel();
+    @When("the officer tries to terminate an account")
+    public void cancellAcount() throws ThereIsNoAccountWithThatAlias, AccountStillHasFunds{
+        doesAccountStillHaveFunds = false;
+        try {
+            BankingSystem.getInstance().getAccountByAlias(alias).cancel();
+        } catch (Exception e) {
+            doesAccountStillHaveFunds = true;
+        }
+        
     }
 
     @Then("The account officer automatically registers the account with his branch")
@@ -106,5 +119,10 @@ public class AccountOfficerSteps {
     @Then("no one can operate the bank account")
     public void verifyIfNoOneCanOperateWithTerminatedAccount() throws ThereIsNoAccountWithThatAlias {
         assertFalse(BankingSystem.getInstance().getAccountByAlias(alias).isRegistered());
+    }
+
+    @Then("an error occurs because an account that still has a balance cannot be terminated")
+    public void verifyDoesAccountStillHaveFunds() {
+        assertTrue(doesAccountStillHaveFunds);
     }
 }

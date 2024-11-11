@@ -47,9 +47,16 @@ public class BankingSystemSteps{
     }
 
     @Then("each transaction is recorded with a correlative number that identifies it, date and time of realization, type of transaction, amount and the accounts involved")
-    public void verifyIfTheTransactionWereRecorded() {
+    public void verifyIfTheTransactionsWereRecorded() {
         assertEquals(4, account1.getTransactions().size());
         assertEquals(4, account2.getTransactions().size());
         assertEquals(6, BankingSystem.getInstance().getTransactionsCount());
+    }
+
+    @Then("the withdrawal transaction is recorded in the banking system")
+    @Then("the deposit transaction is recorded in the bank")
+    @Then("the transfer transaction is recorded in the bank")
+    public void verifyIfTheTransactionWasRecorded() {
+        assertEquals(1, BankingSystem.getInstance().getTransactionsCount());
     }
 }
