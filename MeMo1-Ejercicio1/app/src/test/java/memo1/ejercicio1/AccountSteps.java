@@ -5,9 +5,12 @@ import static org.junit.Assert.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class AccountSteps {
+    private Client clientA;
+    private Client clientB;
     private Account account;
     private Account accountA;
     private Account accountB;
@@ -17,74 +20,72 @@ public class AccountSteps {
     private boolean usingCBU;
     private boolean isItNonexistentAlias;
     private boolean isThereUnregisteredAccount;
+    private boolean isSameAccountOriginDest;
 
     private Address address;
     private Branch branch;
 
     @Before
-    public void beforeScenario(){
+    public void beforeScenario() throws InvalidDNI{
+        Address clientAddressA = new Address("A", "B", "C", "D", 1);
+        Address clientAddressB = new Address("A", "B", "C", "D", 2);
+        clientA = new Client("12345678", "F", "J", LocalDate.of(1984,1,1), clientAddressA);
+        clientB = new Client("87654321", "J", "F", LocalDate.of(1993,4,1), clientAddressB);
         address = new Address("Argentina", "Buenos Aires", "CABA", "Calle 117", 158);
         branch = new Branch(1, "Suc. Belgrano", address);
     }
 
     @Given("I create an account with CBU {long}")
     public void createAccountWithDefaultBalance(long cbu) {
-        account = new Account(cbu, "alias");
-        account.register(branch);
+        account = new Account(cbu, "alias", clientA, branch);
     }
 
     @Given("I create an account with CBU {long} and a balance of {double}")
     public void createAccountWithInitialBalance(long cbu, double balance) {
-        account = new Account(cbu, "alias", balance);
-        account.register(branch);
+        account = new Account(cbu, "alias", clientA, branch, balance);
     }
 
     @Given("An account with CBU {long} and a balance of {double}")
     public void anAccountWithCBUAndBalance(long cbu, double balance) {
-        account = new Account(cbu, "alias", balance);
-        account.register(branch);
+        account = new Account(cbu, "alias", clientA, branch, balance);
     }
 
     @Given("An account A with CBU {long} and a balance of {double}, an account B with CBU {long} and a balance of {double} and a nonexistent CBU")
     @Given("An account A with CBU {long} and a balance of {double} and other account B with CBU {long} and a balance of {double}")
     public void twoAccountsWithCBUAndBalance(long cbuA, double balanceA, long cbuB, double balanceB) throws Exception {
-        accountA = new Account(cbuA, "alias1", balanceA);
-        accountB = new Account(cbuB, "alias2", balanceB);
+        accountA = new Account(cbuA, "alias1", clientA, branch, balanceA);
+        accountB = new Account(cbuB, "alias2", clientB, branch, balanceB);
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountA.register(branch);
-        accountB.register(branch);
         usingCBU = true;
     }
 
     @Given("An account A with alias {string} and a balance of {double} and other account B with alias {string} and a balance of {double}")
     @Given("An account A with alias {string} and a balance of {double}, an account B with alias {string} and a balance of {double} and a nonexistent Alias")
     public void twoAccountsWithAliasAndBalance(String aliasA, double balanceA, String aliasB, double balanceB) throws Exception {
-        accountA = new Account(123456789L, aliasA, balanceA);
-        accountB = new Account(987654321L, aliasB, balanceB);
+        accountA = new Account(123456789L, aliasA, clientA, branch, balanceA);
+        accountB = new Account(987654321L, aliasB, clientB, branch, balanceB);
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountA.register(branch);
-        accountB.register(branch);
         usingCBU = false;
     }
 
-    @Given("an unregistered account A with CBU {long} and a balance of {double} and other account B with CBU {long}")
-    public void unregisteredSenderAccountAndOtherAccount(long cbuA, double balanceA, long cbuB) throws Exception {
-        accountA = new Account(cbuA, "alias1", balanceA);
-        accountB = new Account(cbuB, "alias2");
+    @Given("an unregistered account A with CBU {long} and other account B with CBU {long}")
+    public void unregisteredSenderAccountAndOtherAccount(long cbuA, long cbuB) throws Exception {
+        accountA = new Account(cbuA, "alias1", clientA, branch);
+        accountB = new Account(cbuB, "alias2", clientB, branch);
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountB.register(branch);
+        accountA.cancel();
     }
 
     @Given("an account A with CBU {long} and a balance of {double} and an unregistered account B with CBU {int}")
     public void unregisteredReceiverAccountAndOtherAccount(long cbuA, double balanceA, long cbuB) throws Exception {
-        accountA = new Account(cbuA, "alias1", balanceA);
-        accountB = new Account(cbuB, "alias2");
+        accountA = new Account(cbuA, "alias1", clientA, branch, balanceA);
+        accountB = new Account(cbuB, "alias2", clientB, branch);
         BankingSystem.getInstance().addAccount(accountA);
         BankingSystem.getInstance().addAccount(accountB);
-        accountA.register(branch);
+        accountB.cancel();
     }
 
     @When("I deposit {double} into the account")
@@ -162,6 +163,21 @@ public class AccountSteps {
         }
     }
 
+    @When("client tries to transfer {double} ARS to his same account")
+    public void transferSameAccountOriginDestination(double amount) throws Exception {
+        isSameAccountOriginDest = false;
+        try {
+            account.transfer(account.getAlias(), amount);
+        } catch (SameAccountOriginDestination e) {
+            try {
+                account.transfer(account.getCbu(), amount);
+            } catch (SameAccountOriginDestination i) {
+                isSameAccountOriginDest = true;
+            }
+        }
+    }
+
+
     @Then("The account balance should be {double}")
     public void verifyAccountBalance(double expectedBalance) {
         assertEquals(expectedBalance, account.getBalance(), 0.01);
@@ -203,5 +219,10 @@ public class AccountSteps {
     @Then("The operation should be denied for pending account to be registered")
     public void verifyIsThereUnregisteredAccount() {
         assertTrue(isThereUnregisteredAccount);
+    }
+
+    @Then("The operation should be denied for entering the same origin\\/destination account")
+    public void verifyIsSameAccountOriginDest(){
+        assertTrue(isSameAccountOriginDest);
     }
 }

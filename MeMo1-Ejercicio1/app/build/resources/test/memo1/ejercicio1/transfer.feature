@@ -41,10 +41,9 @@ Feature: Transferring money
     And The account B balance should be 1230.0
 
   Scenario: Sender account cannot transfer if it isn't registered
-    Given an unregistered account A with CBU 987654321 and a balance of 800.0 and other account B with CBU 123456789
+    Given an unregistered account A with CBU 987654321 and other account B with CBU 123456789
     When account A transfer 700.0 to account B
     Then The operation should be denied for pending account to be registered
-    And The account A balance should be 800.0
     And The account B balance should be 0.0
 
   Scenario: Receiver account cannot receive a transferring if it isn't registered
@@ -53,3 +52,9 @@ Feature: Transferring money
     Then The operation should be denied for pending account to be registered
     And The account A balance should be 900.0
     And The account B balance should be 0.0
+
+  Scenario: Failed transfer by same source/destination account
+    Given An account with CBU 123456789 and a balance of 1000.0
+    When client tries to transfer 500.0 ARS to his same account
+    Then The operation should be denied for entering the same origin/destination account
+    And The account balance should be 1000.0

@@ -94,10 +94,6 @@ public class BankingSystem {
         return newCBU;
     }
 
-    public int generateNextTransactionNumber() {
-        return transactions.size();
-    }
-
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
     }

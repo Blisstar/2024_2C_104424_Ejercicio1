@@ -52,6 +52,22 @@ public class ClientTest {
     }
 
     @Test
+    void setAsSingleWorksCorrectly() throws Exception {
+        Client client1 = new Client("42657569", "FF", "G", LocalDate.of(2000, 1, 1), address);
+        Client client2 = new Client("12345678", "FF", "G", LocalDate.of(2000, 1, 1), address);
+        client1.setAsMarriedWithMarriageDate(LocalDate.of(2022,1,1), client2);
+        assertTrue(client1.isItMarried());
+        assertTrue(client2.isItMarried());
+        assertEquals(LocalDate.of(2022,1,1).toString(), client1.getMarriageDate());
+        assertEquals(LocalDate.of(2022,1,1).toString(), client2.getMarriageDate());
+        
+        client1.setAsSingle();
+        assertFalse(client1.isItMarried());
+        assertFalse(client2.isItMarried());
+        assertThrows(ClientIsntMarried.class, client1::getMarriageDate);
+    }
+
+    @Test
     void defaultConstructorInitializeWithInvalidDNIGiveAnError() throws Exception {
         assertThrows(InvalidDNI.class, () -> {
             Client client1 = new Client("ABCDFGH1", "FF", "G", LocalDate.of(2000, 1, 1), address);

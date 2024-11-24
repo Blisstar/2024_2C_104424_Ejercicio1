@@ -11,7 +11,7 @@ public class Transaction {
     private Account secondAccount;
 
     public Transaction(TransactionType type, double amount, Account firstAccount, Account secAccount) {
-        this.number = BankingSystem.getInstance().generateNextTransactionNumber();
+        this.number = TransactionNumberGenerator.getInstance().generateNextTransactionNumber();
         this.type = type;
         this.amount = amount;
         realizationDateTime = LocalDateTime.now();
