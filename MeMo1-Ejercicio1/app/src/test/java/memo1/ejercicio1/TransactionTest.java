@@ -31,12 +31,22 @@ public class TransactionTest{
         Transaction transaction = new Transaction(TransactionType.TRANSFER, 1100, account1, account2);
         LocalDateTime afterTime = LocalDateTime.now();
 
-        assertEquals(0, transaction.getNumber());
         assertTrue(beforeTime.isBefore(transaction.getRealizationDateTime()));
         assertTrue(afterTime.isAfter(transaction.getRealizationDateTime()));
         assertEquals(1100, transaction.getAmount());
         assertEquals(TransactionType.TRANSFER, transaction.getType());
         assertEquals(account1.getCbu(), transaction.getFirstAccount().getCbu());
         assertEquals(account2.getCbu(), transaction.getSecondAccount().getCbu());
+    }
+
+    @Test
+    void theTransactionsShouldntHaveSameNumber() throws Exception {
+        Transaction transaction1 = new Transaction(TransactionType.TRANSFER, 1100, account1, account2);
+        Transaction transaction2 = new Transaction(TransactionType.TRANSFER, 1100, account1, account2);
+        Transaction transaction3 = new Transaction(TransactionType.TRANSFER, 1100, account2, account1);
+
+        assertTrue(transaction1.getNumber() != transaction2.getNumber());
+        assertTrue(transaction1.getNumber() != transaction3.getNumber());
+        assertTrue(transaction2.getNumber() != transaction3.getNumber());
     }
 }

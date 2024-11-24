@@ -46,8 +46,8 @@ public class Client {
         return birthDate.toString();
     }
 
-    public Boolean isItMarried() {
-        return marriageDate != null;
+    public boolean isItMarried() {
+        return (marriageDate != null) && (spouse != null);
     }
 
     public void setAsMarriedWithMarriageDate(LocalDate marriageDate, Client spouse) throws MarriageDateCantBeBeforeBirth {
@@ -57,7 +57,7 @@ public class Client {
         this.spouse = spouse;
         this.marriageDate = marriageDate;
         spouse.setAsMarriedWithMarriageDateAndSpouse(marriageDate, this);
-            }
+    }
         
     private void setAsMarriedWithMarriageDateAndSpouse(LocalDate marriageDate, Client spouse) throws MarriageDateCantBeBeforeBirth {
         if (marriageDate.isBefore(birthDate)) {
@@ -76,6 +76,8 @@ public class Client {
 
     public void setAsSingle() {
         this.marriageDate = null;
+        spouse.setAsSingle();
+        this.spouse = null;
     }
 
     public String getAddress() {

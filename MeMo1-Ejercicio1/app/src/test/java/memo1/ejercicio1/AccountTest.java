@@ -50,6 +50,7 @@ class AccountTest {
 
         accountB.register(branch);
         BankingSystem.getInstance().addAccount(accountA);
+        BankingSystem.getInstance().addAccount(accountB);
 
         assertThrows(UnregisteredAccount.class, () -> accountA.withdraw(10));
         assertThrows(UnregisteredAccount.class, () -> accountA.deposit(300));
