@@ -78,11 +78,13 @@ public class Account {
     }
 
     public void transfer(long otherAccountCbu, double amountToTransfer) throws Exception {
+        if (otherAccountCbu == cbu) throw new SameAccountOriginDestination();
         Account otherAccount = BankingSystem.getInstance().getAccountByCBU(otherAccountCbu);
         this.transfer(otherAccount, amountToTransfer);
     }
 
     public void transfer(String otherAccountAlias, double amountToTransfer) throws Exception {
+        if (otherAccountAlias == alias) throw new SameAccountOriginDestination();
         Account otherAccount = BankingSystem.getInstance().getAccountByAlias(otherAccountAlias);
         this.transfer(otherAccount, amountToTransfer);
     }

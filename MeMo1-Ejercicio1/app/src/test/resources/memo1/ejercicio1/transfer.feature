@@ -52,3 +52,9 @@ Feature: Transferring money
     Then The operation should be denied for pending account to be registered
     And The account A balance should be 900.0
     And The account B balance should be 0.0
+
+  Scenario: Failed transfer by same source/destination account
+    Given An account with CBU 123456789 and a balance of 1000.0
+    When client tries to transfer 500.0 ARS to his same account
+    Then The operation should be denied for entering the same origin/destination account
+    And The account balance should be 1000.0

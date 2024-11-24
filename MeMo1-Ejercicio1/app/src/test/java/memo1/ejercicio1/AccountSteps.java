@@ -20,6 +20,7 @@ public class AccountSteps {
     private boolean usingCBU;
     private boolean isItNonexistentAlias;
     private boolean isThereUnregisteredAccount;
+    private boolean isSameAccountOriginDest;
 
     private Address address;
     private Branch branch;
@@ -162,6 +163,21 @@ public class AccountSteps {
         }
     }
 
+    @When("client tries to transfer {double} ARS to his same account")
+    public void transferSameAccountOriginDestination(double amount) throws Exception {
+        isSameAccountOriginDest = false;
+        try {
+            account.transfer(account.getAlias(), amount);
+        } catch (SameAccountOriginDestination e) {
+            try {
+                account.transfer(account.getCbu(), amount);
+            } catch (SameAccountOriginDestination i) {
+                isSameAccountOriginDest = true;
+            }
+        }
+    }
+
+
     @Then("The account balance should be {double}")
     public void verifyAccountBalance(double expectedBalance) {
         assertEquals(expectedBalance, account.getBalance(), 0.01);
@@ -203,5 +219,10 @@ public class AccountSteps {
     @Then("The operation should be denied for pending account to be registered")
     public void verifyIsThereUnregisteredAccount() {
         assertTrue(isThereUnregisteredAccount);
+    }
+
+    @Then("The operation should be denied for entering the same origin\\/destination account")
+    public void verifyIsSameAccountOriginDest(){
+        assertTrue(isSameAccountOriginDest);
     }
 }
