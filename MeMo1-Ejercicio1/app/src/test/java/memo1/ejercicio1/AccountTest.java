@@ -42,8 +42,8 @@ class AccountTest {
 
     @Test
     void registerWorksCorrectly() throws Exception {
-        Account accountA = new Account(123456789L, "alias1", clientA, branch, 1000);
-        Account accountB = new Account(987654321L, "alias2", clientB, branch, 0);
+        Account accountA = new Account(123456789L, "alias1", clientA, branch);
+        Account accountB = new Account(987654321L, "alias2", clientB, branch);
 
         accountA.cancel();
         accountB.cancel();

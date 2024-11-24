@@ -18,14 +18,14 @@ public class BankingSystemTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        address = new Address("A", "B", "C", "Dorrego", 987);
-        account = new Account(123456789L, "alias", client, branch);
-        BankingSystem.getInstance().addAccount(account);
-
         Address clientAddress = new Address("A", "B", "C", "D", 1);
         client = new Client("12345678", "F", "J", LocalDate.of(1984,1,1), clientAddress);
         Address branchAddress = new Address("Argentina", "Buenos Aires", "CABA", "Calle 117", 158);
         branch = new Branch(1, "Suc. Belgrano", branchAddress);
+
+        address = new Address("A", "B", "C", "Dorrego", 987);
+        account = new Account(123456789L, "alias", client, branch);
+        BankingSystem.getInstance().addAccount(account);
     }
 
     @AfterEach
