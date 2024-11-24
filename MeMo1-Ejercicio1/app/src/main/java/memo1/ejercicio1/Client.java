@@ -82,7 +82,7 @@ public class Client {
         return address.toString();
     }
 
-    public void setMainAccountCBU(Account account) {
+    public void setMainAccount(Account account) {
         mainAccountCBU = account.getCbu();
         accounts.put(mainAccountCBU, account);
     }

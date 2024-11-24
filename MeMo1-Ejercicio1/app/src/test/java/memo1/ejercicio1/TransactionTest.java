@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +14,15 @@ public class TransactionTest{
     private Account account2;
 
     @BeforeEach
-    public void setUp(){
-        account1 = new Account(12345678L, "alias1");
-        account2 = new Account(98765432L, "alias2");
+    public void setUp() throws Throwable{
+        Address clientAddressA = new Address("A", "B", "C", "D", 1);
+        Address clientAddressB = new Address("A", "B", "C", "D", 2);
+        Client clientA = new Client("12345678", "F", "J", LocalDate.of(1984,1,1), clientAddressA);
+        Client clientB = new Client("87654321", "J", "F", LocalDate.of(1993,4,1), clientAddressB);
+        Address branchAddress = new Address("Argentina", "Buenos Aires", "CABA", "Calle 117", 158);
+        Branch branch = new Branch(1, "Suc. Belgrano", branchAddress);
+        account1 = new Account(12345678L, "alias1", clientA, branch);
+        account2 = new Account(98765432L, "alias2", clientB, branch);
     }
 
     @Test

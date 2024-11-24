@@ -5,26 +5,32 @@ import java.util.ArrayList;
 public class Account {
     private Long cbu;
     private String alias;
+    private Client owner;
     private double balance;
     private Branch branch;
     private ArrayList<Transaction> transactions;
 
-    public Account(Long cbu, String alias) {
+    public Account(Long cbu, String alias, Client owner, Branch assignedBranch) {
         this.cbu = cbu;
         this.alias = alias;
-        branch = null;
+        this.owner = owner;
         transactions = new ArrayList<>();
+        balance = 0;
+        register(assignedBranch);
+        owner.setMainAccount(this);
     }
 
-    public Account(Long cbu, String alias, double balance) {
+    public Account(Long cbu, String alias, Client owner, Branch assignedBranch, double balance) {
         if (balance < 0) {
             throw new IllegalArgumentException("Balance cannot be negative.");
         }
         this.cbu = cbu;
         this.alias = alias;
-        this.balance = balance;
-        branch = null;
+        this.owner = owner;
         transactions = new ArrayList<>();
+        register(assignedBranch);
+        owner.setMainAccount(this);
+        this.balance = balance;
     }
 
     public void setAlias(String alias) {

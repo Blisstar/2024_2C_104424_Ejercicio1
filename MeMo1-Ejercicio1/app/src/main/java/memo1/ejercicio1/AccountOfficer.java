@@ -13,11 +13,10 @@ public class AccountOfficer {
         Client ownerClient = BankingSystem.getInstance().getClient(ownerClientDNI);
         if(ownerClient.doItHaveMainAccount()) throw new ClientAlreadyHasAnAcount();
         
-        Account account = new Account(BankingSystem.getInstance().generateNextCBU(), alias);
+        Account account = new Account(BankingSystem.getInstance().generateNextCBU(), alias, ownerClient, assignedBranch);
         BankingSystem.getInstance().addAccount(account);
-        account.register(assignedBranch);
 
-        ownerClient.setMainAccountCBU(account);
+        ownerClient.setMainAccount(account);
         if (coownerClientsDNI != null){
             for (String dni : coownerClientsDNI) {
                 Client coownerClient = BankingSystem.getInstance().getClient(dni);
