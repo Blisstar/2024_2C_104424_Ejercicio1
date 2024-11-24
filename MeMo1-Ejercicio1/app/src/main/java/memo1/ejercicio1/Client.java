@@ -76,7 +76,7 @@ public class Client {
 
     public void setAsSingle() {
         this.marriageDate = null;
-        spouse.setAsSingle();
+        if (spouse.isItMarried())spouse.setAsSingle();
         this.spouse = null;
     }
 
