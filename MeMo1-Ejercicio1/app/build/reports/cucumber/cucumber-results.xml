@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="34" time="1.575">
-    <testcase classname="Add co-owners to my main account" name="Adding co-owners successfully" time="0.045">
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="34" time="1.664">
+    <testcase classname="Add co-owners to my main account" name="Adding co-owners successfully" time="0.033">
         <system-out><![CDATA[Given a bank account, its owner client with DNI "42657569" and another client with DNI "12345678".passed
 When the owner adds the other client to his account as a co-owner by DNI....passed
 Then the other client is added as co-owner..................................passed
@@ -8,32 +8,32 @@ And the coowner has access to the account...................................pass
 And the coowner can't add other coowners....................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Add co-owners to my main account" name="Adding co-owner fails by giving DNI not registered with the bank" time="0.016">
+    <testcase classname="Add co-owners to my main account" name="Adding co-owner fails by giving DNI not registered with the bank" time="0.019">
         <system-out><![CDATA[Given a bank account, its owner client with DNI "12345678" and a DNI "42657569" that is not in the system.passed
 When the client tries to add a co-owner to his account with that DNI........passed
 Then an error occurs and warns that there is no client with that DNI registered in the bank.passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Cancel a branch" name="Branch office is successfully closed down" time="0.011">
+    <testcase classname="Cancel a branch" name="Branch office is successfully closed down" time="0.008">
         <system-out><![CDATA[Given the branch management and a branch office 195 with its account officers and bank accounts.passed
 When the branch is de-registered by management..............................passed
 Then the branch is made inoperative for its account officers, and the bank accounts that are located there are cancelled.passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Cancel a branch" name="Failure to disenroll because the branch has accounts with balance" time="0.01">
+    <testcase classname="Cancel a branch" name="Failure to disenroll because the branch has accounts with balance" time="0.012">
         <system-out><![CDATA[Given the branch management and a branch office 195 with its account officers and bank accounts.passed
 And some of accounts have a balance greater than zero.......................passed
 When the management tries to deregister the branch office...................passed
 Then the operation is denied because there are active accounts with a balance in the branch.passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Cancel a branch" name="Deregistering a branch with a backup branch for its bank accounts" time="0.003">
+    <testcase classname="Cancel a branch" name="Deregistering a branch with a backup branch for its bank accounts" time="0.02">
         <system-out><![CDATA[Given the branch management and two branches 195 and 134 with their account officers and their bank accounts.passed
 When management terminates one of these branches with the other branch as a backup.passed
 Then the branch becomes inoperative and the other branch takes over its bank accounts so that the bank accounts are now located in the backup branch.passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Cancel a client" name="A client is terminated successfully" time="0.01">
+    <testcase classname="Cancel a client" name="A client is terminated successfully" time="0.005">
         <system-out><![CDATA[Given a client A with DNI "42657569" who holds a bank account with balance 0 ARS.passed
 And other client B with DNI "12345678" who has a bank account with client A as co-owner.passed
 When the client leaves the banking system...................................passed
@@ -42,39 +42,27 @@ And the client dissociates himself from the accounts in which he was co-owner.pa
 And the client is maintained becomes inoperative............................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Cancel a client" name="The client is unable to unsubscribe due to a bank account with a balance." time="0.006">
+    <testcase classname="Cancel a client" name="The client is unable to unsubscribe due to a bank account with a balance." time="0.002">
         <system-out><![CDATA[Given a client A with DNI "42657569" who holds a bank account with balance 10 ARS.passed
 When the client tries to deregister from the banking system.................passed
 Then an error occurs because he first has to withdraw all his funds from his bank account to be able to unsubscribe.passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Remove co-owners to my main account" name="Successfully remove co-owners" time="0.007">
-        <system-out><![CDATA[Given a bank account, its owner client with DNI "42657569" and a coowner client with DNI "12345678".passed
-When the owner removes the coowner client of his account as a co-owner by DNI.passed
-Then the coowner client hasn't access to the account........................passed
-]]></system-out>
-    </testcase>
-    <testcase classname="Remove co-owners to my main account" name="Removing co-owner fails by giving ID of a customer who is not a co-owner" time="0.005">
-        <system-out><![CDATA[Given a bank account, its owner client with DNI "12345678" and a DNI "42657569" that is of a client who is not coowner.passed
-When the client tries to remove a co-owner of his account with that DNI.....passed
-Then an error occurs and warns that this client is not a co-owner of the account.passed
-]]></system-out>
-    </testcase>
-    <testcase classname="Depositing money" name="Successfully deposit money into an account" time="0.009">
+    <testcase classname="Depositing money" name="Successfully deposit money into an account" time="0.003">
         <system-out><![CDATA[Given An account with CBU 123456789 and a balance of 1000.0.................passed
 When I deposit 200.0 into the account.......................................passed
 Then The account balance should be 1200.0...................................passed
 And the deposit transaction is recorded in the bank.........................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Depositing money" name="Cannot deposit a negative amount" time="0.007">
+    <testcase classname="Depositing money" name="Cannot deposit a negative amount" time="0.002">
         <system-out><![CDATA[Given An account with CBU 123456789 and a balance of 1000.0.................passed
 When I try to deposit -100.0 into the account...............................passed
 Then The operation should be denied for negative amount.....................passed
 And The account balance should remain 1000.0................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Modify info about a branch" name="I successfully change the name of a branch office." time="0.007">
+    <testcase classname="Modify info about a branch" name="I successfully change the name of a branch office." time="0.003">
         <system-out><![CDATA[Given a branch management and a branch office 123...........................passed
 When the management changes the name of the branch office...................passed
 Then it will appear in the system with this new name........................passed
@@ -86,72 +74,84 @@ When the management changes the location of the branch office...............pass
 Then it will appear in the system with that new location....................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register an account in the Banking System" name="An account is successfully registered" time="0.013">
+    <testcase classname="Register an account in the Banking System" name="An account is successfully registered" time="0.009">
         <system-out><![CDATA[Given an account officer with his branch, an client holder DNI "42657569" and two co-owners DNIs "78945612" , "1234567".passed
 When the account officer registers an account for them......................passed
 Then The account officer automatically registers the account with his branch.passed
 And enables its use for the account holder and co-owners....................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register an account in the Banking System" name="An account is not registered for a customer who already has an account" time="0.005">
+    <testcase classname="Register an account in the Banking System" name="An account is not registered for a customer who already has an account" time="0.004">
         <system-out><![CDATA[Given an account officer with his branch office and an client DNI "42657569" who already has an account.passed
 When the account officer registers an new account for the client............passed
 Then the operation should be denied for trying to create an account to an client who already has an account.passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register an account in the Banking System" name="A cancelled account is registered successfully" time="0.026">
+    <testcase classname="Register an account in the Banking System" name="A cancelled account is registered successfully" time="0.005">
         <system-out><![CDATA[Given an account officer with his branch and an client DNI "42657569" who has a cancelled account.passed
 When the account officer registers the cancelled account....................passed
 Then The account officer automatically registers the account with his branch.passed
 And enables its use for the account holder and co-owners....................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register a branch in the Banking System" name="Branch is successfully registered" time="0.013">
+    <testcase classname="Register a branch in the Banking System" name="Branch is successfully registered" time="0.015">
         <system-out><![CDATA[Given branch manager and a new branch office with number 123................passed
 When the branch office is registered by the branch manager..................passed
 Then the branch is operational in the system with its respective location, assigned a number and a name..passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register a branch in the Banking System" name="The branch is not registered due to an existing number branch." time="0.003">
+    <testcase classname="Register a branch in the Banking System" name="The branch is not registered due to an existing number branch." time="0.013">
         <system-out><![CDATA[Given the branch manager and a branch office with number 123 that is in the system.passed
 When the branch is registered by the branch manager with a number already owned by another branch..passed
 Then the operation is denied due to the branch with that number already exists.passed
 And the branch is not replaced in the system................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register a client in the Banking System" name="A customer is successfully registered" time="0.004">
+    <testcase classname="Register a client in the Banking System" name="A customer is successfully registered" time="0.008">
         <system-out><![CDATA[Given a person with DNI "42657569" and his data (last name, first name, date of birth and address).passed
 When the person registers as a client at the bank...........................passed
 Then the client with DNI "42657569" is in the System........................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register a client in the Banking System" name="Unable to register the customer for invalid DNI" time="0.002">
+    <testcase classname="Register a client in the Banking System" name="Unable to register the customer for invalid DNI" time="0.009">
         <system-out><![CDATA[Given a person with DNI "42657569" and his data (last name, first name, date of birth and address).passed
 When the person try to registers as a client and puts an invalid DNI "123456".passed
 Then the operation should be denied for invalid DNI.........................passed
 And the client with DNI "123456" is not in the System.......................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Register a client in the Banking System" name="Unable to register the customer by DNI already registered in the bank" time="0.002">
+    <testcase classname="Register a client in the Banking System" name="Unable to register the customer by DNI already registered in the bank" time="0.006">
         <system-out><![CDATA[Given a client with DNI "42657569" and a person.............................passed
 When the person try to registers as a client and puts in a DNI "42657569" already registered in the banking system.passed
 Then the operation shoul be denied due to there is already a client registered with that DNI.passed
 And the client is not replaced in the system................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Bank want to know if a client is married" name="It is registered in the bank if a client is married" time="0.004">
+    <testcase classname="Bank want to know if a client is married" name="It is registered in the bank if a client is married" time="0.016">
         <system-out><![CDATA[Given a client A with DNI "42657569" and date of birth "2000-06-05".........passed
 And other client B with DNI "12345678" and date of birth "2000-06-17".......passed
 When the system registers two clients are spouses with marriage date "2022-02-02".passed
 Then the two clients become spouses with a marriage date....................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Bank want to know if a client is married" name="A client cannot be set as married if the marriage date is invalid." time="0.008">
+    <testcase classname="Bank want to know if a client is married" name="A client cannot be set as married if the marriage date is invalid." time="0.021">
         <system-out><![CDATA[Given a client A with DNI "12345678" and date of birth "2000-06-17".........passed
 And other client B with DNI "42657569" and date of birth "2000-06-05".......passed
 When the system registers two clients are spouses with marriage date "1999-01-01".passed
 Then the operation is denied due to marriage date is before date of birth...passed
 And they are not registered as spouses......................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Remove co-owners to my main account" name="Successfully remove co-owners" time="0.007">
+        <system-out><![CDATA[Given a bank account, its owner client with DNI "42657569" and a coowner client with DNI "12345678".passed
+When the owner removes the coowner client of his account as a co-owner by DNI.passed
+Then the coowner client hasn't access to the account........................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Remove co-owners to my main account" name="Removing co-owner fails by giving ID of a customer who is not a co-owner" time="0.008">
+        <system-out><![CDATA[Given a bank account, its owner client with DNI "12345678" and a DNI "42657569" that is of a client who is not coowner.passed
+When the client tries to remove a co-owner of his account with that DNI.....passed
+Then an error occurs and warns that this client is not a co-owner of the account.passed
 ]]></system-out>
     </testcase>
     <testcase classname="Transferring money" name="Successfully transfer money from a account to other account using CBU" time="0.02">
@@ -162,13 +162,13 @@ And The account B balance should be 500.0...................................pass
 And the transfer transaction is recorded in the bank........................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Cannot transfer more money than available balance" time="0.005">
+    <testcase classname="Transferring money" name="Cannot transfer more money than available balance" time="0.007">
         <system-out><![CDATA[Given An account A with CBU 123456789 and a balance of 250.0 and other account B with CBU 987654321 and a balance of 400.0.passed
 When account A try to transfer 300.0 to account B using CBU.................passed
 Then The operation should be denied due to lack of funds in the account A...passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Cannot transfer a negative amount" time="0.014">
+    <testcase classname="Transferring money" name="Cannot transfer a negative amount" time="0.002">
         <system-out><![CDATA[Given An account A with CBU 123456789 and a balance of 1900.0 and other account B with CBU 987654321 and a balance of 1100.0.passed
 When account A try to transfer -500 to account B using CBU..................passed
 Then The operation should be denied for negative amount.....................passed
@@ -176,7 +176,7 @@ And The account A balance should be 1900.0..................................pass
 And The account B balance should be 1100.0..................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Failed transfer due to nonexistent CBU" time="0.007">
+    <testcase classname="Transferring money" name="Failed transfer due to nonexistent CBU" time="0.002">
         <system-out><![CDATA[Given An account A with CBU 123456789 and a balance of 400.0, an account B with CBU 987654321 and a balance of 1000.0 and a nonexistent CBU.passed
 When account A try to transfer 300.0 to account B but enter a nonexistent CBU.passed
 Then The operation should be denied for entering a non-existent CBU.........passed
@@ -184,7 +184,7 @@ And The account A balance should be 400.0...................................pass
 And The account B balance should be 1000.0..................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Successfully transfer money from a account to other account using Alias" time="0.011">
+    <testcase classname="Transferring money" name="Successfully transfer money from a account to other account using Alias" time="0.002">
         <system-out><![CDATA[Given An account A with alias "uno.dos.tres" and a balance of 600.0 and other account B with alias "tres.dos.uno" and a balance of 800.0.passed
 When account A transfer 350.0 to account B using alias......................passed
 Then The account A balance should be 250.0..................................passed
@@ -192,7 +192,7 @@ And The account B balance should be 1150.0..................................pass
 And the transfer transaction is recorded in the bank........................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Failed transfer due to nonexistent Alias" time="0.005">
+    <testcase classname="Transferring money" name="Failed transfer due to nonexistent Alias" time="0.002">
         <system-out><![CDATA[Given An account A with alias "uno.dos.tres" and a balance of 960.0, an account B with alias "tres.dos.uno" and a balance of 1230.0 and a nonexistent Alias.passed
 When account A try to transfer 300.0 to account B but enter a nonexistent Alias.passed
 Then The operation should be denied for entering a non-existent Alias.......passed
@@ -200,14 +200,14 @@ And The account A balance should be 960.0...................................pass
 And The account B balance should be 1230.0..................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Sender account cannot transfer if it isn't registered" time="0.005">
+    <testcase classname="Transferring money" name="Sender account cannot transfer if it isn't registered" time="0.007">
         <system-out><![CDATA[Given an unregistered account A with CBU 987654321 and other account B with CBU 123456789.passed
 When account A transfer 700.0 to account B..................................passed
 Then The operation should be denied for pending account to be registered....passed
 And The account B balance should be 0.0.....................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Receiver account cannot receive a transferring if it isn't registered" time="0.006">
+    <testcase classname="Transferring money" name="Receiver account cannot receive a transferring if it isn't registered" time="0.008">
         <system-out><![CDATA[Given an account A with CBU 987654321 and a balance of 900.0 and an unregistered account B with CBU 123456789.passed
 When account A transfer 150.0 to account B..................................passed
 Then The operation should be denied for pending account to be registered....passed
@@ -215,14 +215,14 @@ And The account A balance should be 900.0...................................pass
 And The account B balance should be 0.0.....................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Transferring money" name="Failed transfer by same source/destination account" time="0.004">
+    <testcase classname="Transferring money" name="Failed transfer by same source/destination account" time="0.008">
         <system-out><![CDATA[Given An account with CBU 123456789 and a balance of 1000.0.................passed
 When client tries to transfer 500.0 ARS to his same account.................passed
 Then The operation should be denied for entering the same origin/destination account.passed
 And The account balance should be 1000.0....................................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Withdrawing money" name="Successfully withdraw money when the balance is sufficient" time="0.008">
+    <testcase classname="Withdrawing money" name="Successfully withdraw money when the balance is sufficient" time="0.009">
         <system-out><![CDATA[Given An account with CBU 123456789 and a balance of 1000.0.................passed
 When I withdraw 300.0 from the account......................................passed
 Then The account balance should be 700.0....................................passed
