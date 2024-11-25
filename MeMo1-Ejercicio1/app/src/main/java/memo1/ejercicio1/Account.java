@@ -1,11 +1,13 @@
 package memo1.ejercicio1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Account {
     private Long cbu;
     private String alias;
     private Client owner;
+    private HashMap<String, Client> coowners;
     private double balance;
     private Branch branch;
     private ArrayList<Transaction> transactions;
@@ -14,6 +16,7 @@ public class Account {
         this.cbu = cbu;
         this.alias = alias;
         this.owner = owner;
+        coowners = new HashMap<>();
         transactions = new ArrayList<>();
         balance = 0;
         register(assignedBranch);
@@ -113,6 +116,15 @@ public class Account {
         if (!client.isYourMainAccount(cbu)) throw new YouDontHavePermissions();
         Client coowner = BankingSystem.getInstance().getClient(coownerDNI);
         coowner.addSecundaryAccount(this);
+        coowners.put(coownerDNI, coowner);
+    }
+
+    public void deleteCoowner(Client client, String coownerDNI) throws Exception {
+        if (!isRegistered()) throw new UnregisteredAccount();
+        if (!client.isYourMainAccount(cbu)) throw new YouDontHavePermissions();
+        if (!coowners.containsKey(coownerDNI)) throw new ThisClientIsNotCoowner();
+        coowners.get(coownerDNI).deleteSecundaryAccount(cbu);
+        coowners.remove(coownerDNI);
     }
 
     public boolean isRegistered() {

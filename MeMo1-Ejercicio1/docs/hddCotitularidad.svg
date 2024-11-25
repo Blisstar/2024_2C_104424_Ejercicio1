@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- created with bpmn-js / http://bpmn.io -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="680" height="452" viewBox="191 54 695 452" version="1.1"><defs><marker id="activity-black-black-dpfzzdv6og5fzdc3fslje5cqx" viewBox="0 0 20 20" refX="11" refY="10" markerWidth="10" markerHeight="10" orient="auto"><path d="M 1 5 L 11 10 L 1 15 Z" style="fill: black; stroke-width: 1px; stroke-linecap: round; stroke-dasharray: 10000, 1; stroke: black;"/></marker></defs><g class="djs-group"><g class="djs-element djs-connection" data-element-id="connection_4809" style="display: block;"><g class="djs-visual"><polyline points="301,292 412,366 " style="stroke: black; fill: none; stroke-width: 1.5px; stroke-linejoin: round; marker-end: url('#activity-black-black-dpfzzdv6og5fzdc3fslje5cqx');"/><text lineHeight="1.2" wordWrap="break-word" overflowWrap="break-word" hyphens="auto" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="366.11501125432994" y="322.74334083622">Quita</tspan></text><path d="
+      M 321 303.23002250865994
+      m 11,0
+      a 11,11 0 1,0 -22,0
+      a 11,11 0 1,0 22,0
+      " style="fill: white; stroke: black;"/><text lineHeight="1.2" position="absolute" class="djs-labelNumber" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="317" y="307.23002250865994">1</tspan></text></g><polyline points="301,292 412,366 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="295" y="286" width="123" height="86" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-connection" data-element-id="connection_0635" style="display: block;"><g class="djs-visual"><polyline points="492,380 592,379 " style="stroke: black; fill: none; stroke-width: 1.5px; stroke-linejoin: round; marker-end: url('#activity-black-black-dpfzzdv6og5fzdc3fslje5cqx');"/><text lineHeight="1.2" wordWrap="break-word" overflowWrap="break-word" hyphens="auto" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="560.9045102170528" y="394.40451021705275">de su</tspan></text></g><polyline points="492,380 592,379 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="486" y="373" width="112" height="13" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-connection" data-element-id="connection_3359" style="display: block;"><g class="djs-visual"><polyline points="672,380 762,379 " style="stroke: black; fill: none; stroke-width: 1.5px; stroke-linejoin: round; marker-end: url('#activity-black-black-dpfzzdv6og5fzdc3fslje5cqx');"/><text lineHeight="1.2" wordWrap="break-word" overflowWrap="break-word" hyphens="auto" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="735.8939010706728" y="394.39390107067277">a un</tspan></text></g><polyline points="672,380 762,379 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="666" y="373" width="102" height="13" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_6893" style="display: block;" transform="matrix(1 0 0 1 212 60)"><g class="djs-visual"><rect x="0" y="0" width="668" height="440" rx="0" ry="0" style="stroke: rgb(0, 0, 0); stroke-width: 2px; fill: none;"/><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="8" y="18.799999999999997">Quitar cotitularidad</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="668" height="440" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="680" height="452" class="djs-outline" style="fill: none;"/></g><g class="djs-children"><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_8592" style="display: block;" transform="matrix(1 0 0 1 232 233)"><g class="djs-visual"><svg xmlns="http://www.w3.org/2000/svg" fill=" #000000" viewBox="0 0 24 26" width="75" height="75"><path d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"/><path d="M0 0h24v24H0z" fill="none"/></svg><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="17.91015625" y="75">Cliente</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="75" height="75" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="87" height="87" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_7910" style="display: block;" transform="matrix(1 0 0 1 412 342)"><g class="djs-visual"><svg xmlns="http://www.w3.org/2000/svg" fill=" #000000" width="48.75" height="48.75" viewBox="0 0 24 26" x="12.5" y="12.5"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="2.1513671875" y="74.75">Cotitularidad</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="75" height="75" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="87" height="87" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_9850" style="display: block;" transform="matrix(1 0 0 1 592 342)"><g class="djs-visual"><svg xmlns="http://www.w3.org/2000/svg" fill=" #000000" width="48.75" height="48.75" viewBox="0 0 24 24" x="12.5" y="12.5"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.35 18.5C8.66 17.56 10.26 17 12 17s3.34.56 4.65 1.5c-1.31.94-2.91 1.5-4.65 1.5s-3.34-.56-4.65-1.5zm10.79-1.38C16.45 15.8 14.32 15 12 15s-4.45.8-6.14 2.12C4.7 15.73 4 13.95 4 12c0-4.42 3.58-8 8-8s8 3.58 8 8c0 1.95-.7 3.73-1.86 5.12z"/><path d="M12 6c-1.93 0-3.5 1.57-3.5 3.5S10.07 13 12 13s3.5-1.57 3.5-3.5S13.93 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/></g></g></svg><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="17.3642578125" y="74.75">Cuenta </tspan><tspan x="13.4462890625" y="88.75">bancaria</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="75" height="75" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="87" height="87" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_9940" style="display: block;" transform="matrix(1 0 0 1 762 342)"><g class="djs-visual"><svg xmlns="http://www.w3.org/2000/svg" fill=" #000000" height="48.75" viewBox="0 0 24 24" width="48.75" x="12.5" y="12.5"><path d="M0 0h24v24H0z" fill="none"/><path d="M22 3H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 1.99-.9 1.99-2L24 5c0-1.1-.9-2-2-2zm0 16H2V5h20v14zM21 6h-7v5h7V6zm-1 2l-2.5 1.75L15 8V7l2.5 1.75L20 7v1zM9 12c1.65 0 3-1.35 3-3s-1.35-3-3-3-3 1.35-3 3 1.35 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 8.59c0-2.5-3.97-3.58-6-3.58s-6 1.08-6 3.58V18h12v-1.41zM5.48 16c.74-.5 2.22-1 3.52-1s2.77.49 3.52 1H5.48z"/></svg><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="17.91015625" y="74.75">Cliente </tspan><tspan x="14.9892578125" y="88.75">cotitular</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="75" height="75" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="87" height="87" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-connection" data-element-id="connection_6898" style="display: block;"><g class="djs-visual"><polyline points="294,253 412,165 " style="stroke: black; fill: none; stroke-width: 1.5px; stroke-linejoin: round; marker-end: url('#activity-black-black-dpfzzdv6og5fzdc3fslje5cqx');"/><text lineHeight="1.2" wordWrap="break-word" overflowWrap="break-word" hyphens="auto" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="365.88096617065895" y="217.88096617065895">Otorga</tspan></text><path d="
+      M 314 236.68257645509055
+      m 11,0
+      a 11,11 0 1,0 -22,0
+      a 11,11 0 1,0 22,0
+      " style="fill: white; stroke: black;"/><text lineHeight="1.2" position="absolute" class="djs-labelNumber" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="310" y="240.68257645509055">2</tspan></text></g><polyline points="294,253 412,165 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="288" y="159" width="130" height="100" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_6938" style="display: block;" transform="matrix(1 0 0 1 412 113)"><g class="djs-visual"><svg xmlns="http://www.w3.org/2000/svg" fill=" #000000" width="48.75" height="48.75" viewBox="0 0 24 26" x="12.5" y="12.5"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="2.1513671875" y="74.75">Cotitularidad</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="75" height="75" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="87" height="87" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_7188" style="display: block;" transform="matrix(1 0 0 1 593 114)"><g class="djs-visual"><svg xmlns="http://www.w3.org/2000/svg" fill=" #000000" width="48.75" height="48.75" viewBox="0 0 24 24" x="12.5" y="12.5"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.35 18.5C8.66 17.56 10.26 17 12 17s3.34.56 4.65 1.5c-1.31.94-2.91 1.5-4.65 1.5s-3.34-.56-4.65-1.5zm10.79-1.38C16.45 15.8 14.32 15 12 15s-4.45.8-6.14 2.12C4.7 15.73 4 13.95 4 12c0-4.42 3.58-8 8-8s8 3.58 8 8c0 1.95-.7 3.73-1.86 5.12z"/><path d="M12 6c-1.93 0-3.5 1.57-3.5 3.5S10.07 13 12 13s3.5-1.57 3.5-3.5S13.93 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/></g></g></svg><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="17.3642578125" y="74.75">Cuenta </tspan><tspan x="13.4462890625" y="88.75">bancaria</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="75" height="75" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="87" height="87" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-shape" data-element-id="shape_2465" style="display: block;" transform="matrix(1 0 0 1 763 114)"><g class="djs-visual"><svg xmlns="http://www.w3.org/2000/svg" fill=" #000000" height="48.75" viewBox="0 0 24 24" width="48.75" x="12.5" y="12.5"><path d="M0 0h24v24H0z" fill="none"/><path d="M22 3H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 1.99-.9 1.99-2L24 5c0-1.1-.9-2-2-2zm0 16H2V5h20v14zM21 6h-7v5h7V6zm-1 2l-2.5 1.75L15 8V7l2.5 1.75L20 7v1zM9 12c1.65 0 3-1.35 3-3s-1.35-3-3-3-3 1.35-3 3 1.35 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 8.59c0-2.5-3.97-3.58-6-3.58s-6 1.08-6 3.58V18h12v-1.41zM5.48 16c.74-.5 2.22-1 3.52-1s2.77.49 3.52 1H5.48z"/></svg><text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: rgb(0, 0, 0);"><tspan x="17.91015625" y="74.75">Cliente </tspan><tspan x="9.53125" y="88.75">registrado</tspan></text></g><rect class="djs-hit djs-hit-all" x="0" y="0" width="75" height="75" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="-6" y="-6" width="87" height="87" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-connection" data-element-id="connection_6866" style="display: block;"><g class="djs-visual"><polyline points="492,151 593,150 " style="stroke: black; fill: none; stroke-width: 1.5px; stroke-linejoin: round; marker-end: url('#activity-black-black-dpfzzdv6og5fzdc3fslje5cqx');"/><text lineHeight="1.2" wordWrap="break-word" overflowWrap="break-word" hyphens="auto" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="561.405455598357" y="165.405455598357">de su</tspan></text></g><polyline points="492,151 593,150 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="486" y="144" width="113" height="13" class="djs-outline" style="fill: none;"/></g></g><g class="djs-group"><g class="djs-element djs-connection hover" data-element-id="connection_7971" style="display: block;"><g class="djs-visual"><polyline points="673,151 763,150 " style="stroke: black; fill: none; stroke-width: 1.5px; stroke-linejoin: round; marker-end: url('#activity-black-black-dpfzzdv6og5fzdc3fslje5cqx');"/><text lineHeight="1.2" wordWrap="break-word" overflowWrap="break-word" hyphens="auto" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;"><tspan x="736.8939010706728" y="165.39390107067277">a otro</tspan></text></g><polyline points="673,151 763,150 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;"/><rect x="667" y="144" width="102" height="13" class="djs-outline" style="fill: none;"/></g></g></g></g></svg>
+<!-- <DST>
+{
+  "domain": {
+    "name": "default",
+    "actors": {
+      "Person": "<svg viewBox=\"0 0 24 26\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>",
+      "Group": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"48\" viewBox=\"0 0 24 26\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M16.5 13c-1.2 0-3.07.34-4.5 1-1.43-.67-3.3-1-4.5-1C5.33 13 1 14.08 1 16.25V19h22v-2.75c0-2.17-4.33-3.25-6.5-3.25zm-4 4.5h-10v-1.25c0-.54 2.56-1.75 5-1.75s5 1.21 5 1.75v1.25zm9 0H14v-1.25c0-.46-.2-.86-.52-1.22.88-.3 1.96-.53 3.02-.53 2.44 0 5 1.21 5 1.75v1.25zM7.5 12c1.93 0 3.5-1.57 3.5-3.5S9.43 5 7.5 5 4 6.57 4 8.5 5.57 12 7.5 12zm0-5.5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 5.5c1.93 0 3.5-1.57 3.5-3.5S18.43 5 16.5 5 13 6.57 13 8.5s1.57 3.5 3.5 3.5zm0-5.5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z\"/></svg>",
+      "System": "<svg viewBox=\"0 0 24 26\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M20,18c1.1,0,2-0.9,2-2V6c0-1.1-0.9-2-2-2H4C2.9,4,2,4.9,2,6v10c0,1.1,0.9,2,2,2H0v2h24v-2H20z M4,6h16v10H4V6z\"/></svg>"
+    },
+    "workObjects": {
+      "Document": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 26\"><path fill=\"none\" d=\"M0 0h24v24H0V0z\"/><path d=\"M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z\"/></svg>",
+      "Folder": "<svg viewBox=\"0 0 24 26\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"none\" d=\"M0,0h24v24H0V0z\"/><path d=\"M9.17,6l2,2H20v10L4,18V6H9.17 M10,4H4C2.9,4,2.01,4.9,2.01,6L2,18c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V8c0-1.1-0.9-2-2-2 h-8L10,4L10,4z\"/></svg>",
+      "Call": "<svg viewBox=\"0 0 24 26\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"none\" d=\"M0,0h24v24H0V0z\"/><path d=\"M6.54,5C6.6,5.89,6.75,6.76,6.99,7.59l-1.2,1.2C5.38,7.59,5.12,6.32,5.03,5H6.54 M16.4,17.02c0.85,0.24,1.72,0.39,2.6,0.45 v1.49c-1.32-0.09-2.59-0.35-3.8-0.75L16.4,17.02 M7.5,3H4C3.45,3,3,3.45,3,4c0,9.39,7.61,17,17,17c0.55,0,1-0.45,1-1v-3.49\tc0-0.55-0.45-1-1-1c-1.24,0-2.45-0.2-3.57-0.57c-0.1-0.04-0.21-0.05-0.31-0.05c-0.26,0-0.51,0.1-0.71,0.29l-2.2,2.2 c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2C9.1,8.31,9.18,7.92,9.07,7.57C8.7,6.45,8.5,5.25,8.5,4C8.5,3.45,8.05,3,7.5,3L7.5,3z\"/></svg>",
+      "Email": "<svg viewBox=\"0 0 24 26\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"none\" d=\"M0,0h24v24H0V0z\"/><path fill-opacity=\"0.9\" d=\"M12,1.95c-5.52,0-10,4.48-10,10s4.48,10,10,10h5v-2h-5c-4.34,0-8-3.66-8-8s3.66-8,8-8s8,3.66,8,8v1.43 c0,0.79-0.71,1.57-1.5,1.57S17,14.17,17,13.38v-1.43c0-2.76-2.24-5-5-5s-5,2.24-5,5s2.24,5,5,5c1.38,0,2.64-0.56,3.54-1.47 c0.65,0.89,1.77,1.47,2.96,1.47c1.97,0,3.5-1.6,3.5-3.57v-1.43C22,6.43,17.52,1.95,12,1.95z M12,14.95c-1.66,0-3-1.34-3-3 s1.34-3,3-3s3,1.34,3,3S13.66,14.95,12,14.95z\"/></svg>",
+      "Conversation": "<svg height=\"48\" viewBox=\"0 0 24 26\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0 0h24v24H0V0z\" fill=\"none\"/><path d=\"M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z\"/></svg>",
+      "Info": "<svg height=\"48\" viewBox=\"0 0 24 26\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z\"/></svg>",
+      "Account-Circle": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24px\" height=\"24px\" viewBox=\"0 0 24 24\"><g><rect fill=\"none\" height=\"24\" width=\"24\"/></g><g><g><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.35 18.5C8.66 17.56 10.26 17 12 17s3.34.56 4.65 1.5c-1.31.94-2.91 1.5-4.65 1.5s-3.34-.56-4.65-1.5zm10.79-1.38C16.45 15.8 14.32 15 12 15s-4.45.8-6.14 2.12C4.7 15.73 4 13.95 4 12c0-4.42 3.58-8 8-8s8 3.58 8 8c0 1.95-.7 3.73-1.86 5.12z\"/><path d=\"M12 6c-1.93 0-3.5 1.57-3.5 3.5S10.07 13 12 13s3.5-1.57 3.5-3.5S13.93 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z\"/></g></g></svg>",
+      "Contact-Mail": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 0 24 24\" width=\"24px\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M22 3H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 1.99-.9 1.99-2L24 5c0-1.1-.9-2-2-2zm0 16H2V5h20v14zM21 6h-7v5h7V6zm-1 2l-2.5 1.75L15 8V7l2.5 1.75L20 7v1zM9 12c1.65 0 3-1.35 3-3s-1.35-3-3-3-3 1.35-3 3 1.35 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 8.59c0-2.5-3.97-3.58-6-3.58s-6 1.08-6 3.58V18h12v-1.41zM5.48 16c.74-.5 2.22-1 3.52-1s2.77.49 3.52 1H5.48z\"/></svg>"
+    }
+  },
+  "dst": [
+    {
+      "type": "domainStory:activity",
+      "name": "de su",
+      "id": "connection_0635",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "pickedColor": "black",
+      "number": null,
+      "waypoints": [
+        {
+          "original": {
+            "x": 450,
+            "y": 380
+          },
+          "x": 492,
+          "y": 380
+        },
+        {
+          "original": {
+            "x": 610,
+            "y": 379
+          },
+          "x": 592,
+          "y": 379
+        }
+      ],
+      "source": "shape_7910",
+      "target": "shape_9850",
+      "multipleNumberAllowed": false
+    },
+    {
+      "type": "domainStory:activity",
+      "name": "a un",
+      "id": "connection_3359",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "pickedColor": "black",
+      "number": null,
+      "waypoints": [
+        {
+          "original": {
+            "x": 630,
+            "y": 380
+          },
+          "x": 672,
+          "y": 380
+        },
+        {
+          "original": {
+            "x": 782,
+            "y": 379
+          },
+          "x": 762,
+          "y": 379
+        }
+      ],
+      "source": "shape_9850",
+      "target": "shape_9940",
+      "multipleNumberAllowed": false
+    },
+    {
+      "type": "domainStory:activity",
+      "name": "Quita",
+      "id": "connection_4809",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "pickedColor": "black",
+      "number": 1,
+      "waypoints": [
+        {
+          "original": {
+            "x": 270,
+            "y": 271
+          },
+          "x": 301,
+          "y": 292
+        },
+        {
+          "original": {
+            "x": 432,
+            "y": 379
+          },
+          "x": 412,
+          "y": 366
+        }
+      ],
+      "source": "shape_8592",
+      "target": "shape_7910",
+      "multipleNumberAllowed": false
+    },
+    {
+      "type": "domainStory:activity",
+      "name": "de su",
+      "id": "connection_6866",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "pickedColor": "black",
+      "number": null,
+      "waypoints": [
+        {
+          "original": {
+            "x": 450,
+            "y": 151
+          },
+          "x": 492,
+          "y": 151
+        },
+        {
+          "original": {
+            "x": 613,
+            "y": 150
+          },
+          "x": 593,
+          "y": 150
+        }
+      ],
+      "source": "shape_6938",
+      "target": "shape_7188",
+      "multipleNumberAllowed": false
+    },
+    {
+      "type": "domainStory:activity",
+      "name": "Otorga",
+      "id": "connection_6898",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "pickedColor": "black",
+      "number": 2,
+      "waypoints": [
+        {
+          "original": {
+            "x": 270,
+            "y": 271
+          },
+          "x": 294,
+          "y": 253
+        },
+        {
+          "original": {
+            "x": 432,
+            "y": 150
+          },
+          "x": 412,
+          "y": 165
+        }
+      ],
+      "source": "shape_8592",
+      "target": "shape_6938",
+      "multipleNumberAllowed": false
+    },
+    {
+      "type": "domainStory:activity",
+      "name": "a otro",
+      "id": "connection_7971",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "pickedColor": "black",
+      "number": null,
+      "waypoints": [
+        {
+          "original": {
+            "x": 631,
+            "y": 152
+          },
+          "x": 673,
+          "y": 151
+        },
+        {
+          "original": {
+            "x": 783,
+            "y": 150
+          },
+          "x": 763,
+          "y": 150
+        }
+      ],
+      "source": "shape_7188",
+      "target": "shape_2465",
+      "multipleNumberAllowed": false
+    },
+    {
+      "type": "domainStory:workObjectContact-Mail",
+      "name": "Cliente registrado",
+      "id": "shape_2465",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "x": 763,
+      "y": 114,
+      "parent": "shape_6893"
+    },
+    {
+      "type": "domainStory:group",
+      "name": "Quitar cotitularidad",
+      "id": "shape_6893",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "pickedColor": "#000000",
+      "x": 212,
+      "y": 60,
+      "height": 440,
+      "width": 668
+    },
+    {
+      "type": "domainStory:workObjectDocument",
+      "name": "Cotitularidad",
+      "id": "shape_6938",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "x": 412,
+      "y": 113,
+      "parent": "shape_6893"
+    },
+    {
+      "type": "domainStory:workObjectAccount-Circle",
+      "name": "Cuenta bancaria",
+      "id": "shape_7188",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "x": 593,
+      "y": 114,
+      "parent": "shape_6893"
+    },
+    {
+      "type": "domainStory:workObjectDocument",
+      "name": "Cotitularidad",
+      "id": "shape_7910",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "x": 412,
+      "y": 342,
+      "parent": "shape_6893"
+    },
+    {
+      "type": "domainStory:actorPerson",
+      "name": "Cliente",
+      "id": "shape_8592",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "x": 232,
+      "y": 233,
+      "parent": "shape_6893"
+    },
+    {
+      "type": "domainStory:workObjectAccount-Circle",
+      "name": "Cuenta bancaria",
+      "id": "shape_9850",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "x": 592,
+      "y": 342,
+      "parent": "shape_6893"
+    },
+    {
+      "type": "domainStory:workObjectContact-Mail",
+      "name": "Cliente cotitular",
+      "id": "shape_9940",
+      "$type": "Element",
+      "di": {},
+      "$descriptor": {},
+      "x": 762,
+      "y": 342,
+      "parent": "shape_6893"
+    },
+    {
+      "info": ""
+    },
+    {
+      "version": "2.2.0"
+    }
+  ]
+}
+ </DST> -->
