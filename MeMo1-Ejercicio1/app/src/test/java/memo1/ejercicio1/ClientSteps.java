@@ -24,6 +24,7 @@ public class ClientSteps {
     private boolean marriageDateIsBeforeBirthDate;
     private boolean isNonexistentCoowner;
     private boolean doesAccountStillHaveFunds;
+    private boolean isNotCoowner;
 
     private LocalDate stringToDate(String date) {
         String[] split = date.split("-");
@@ -85,7 +86,7 @@ public class ClientSteps {
         officer.createAndRegisterAccount("alias2", dni, coowners);
     }
 
-    
+    @Given("a bank account, its owner client with DNI {string} and a DNI {string} that is of a client who is not coowner")
     @Given("a bank account, its owner client with DNI {string} and another client with DNI {string}")
     public void twoClientsWithOwnAccounts(String dni1, String dni2) throws Exception {
         registeredDNI1 = dni1;
@@ -96,6 +97,21 @@ public class ClientSteps {
         manager.registerNewBranch(123, "Suc", address);
         officer = new AccountOfficer(123);
         officer.createAndRegisterAccount("aliasOfOwner", dni1, null);
+        account = BankingSystem.getInstance().getAccountByAlias("aliasOfOwner");
+    }
+
+    @Given("a bank account, its owner client with DNI {string} and a coowner client with DNI {string}")
+    public void anOwnerAndACoowner(String dni1, String dni2) throws Exception {
+        registeredDNI1 = dni1;
+        registeredDNI2 = dni2;
+        LocalDate bDate = LocalDate.of(2000,1,1);
+        BankingSystem.getInstance().registerClient(dni1, "F", "J", bDate, address);
+        BankingSystem.getInstance().registerClient(dni2, "F", "J", bDate, address);
+        manager.registerNewBranch(123, "Suc", address);
+        ArrayList<String> coowners = new ArrayList<>();
+        coowners.add(registeredDNI2);
+        officer = new AccountOfficer(123);
+        officer.createAndRegisterAccount("aliasOfOwner", dni1, coowners);
         account = BankingSystem.getInstance().getAccountByAlias("aliasOfOwner");
     }
 
@@ -160,6 +176,17 @@ public class ClientSteps {
             BankingSystem.getInstance().getClient(registeredDNI1).addCoownerToMainAccount(registeredDNI2);
         } catch (ThereIsNoClientWithThatDNI e) {
             isNonexistentCoowner = true;
+        }
+    }
+
+    @When("the owner removes the coowner client of his account as a co-owner by DNI")
+    @When("the client tries to remove a co-owner of his account with that DNI")
+    public void removeCoowner() throws Exception {
+        isNotCoowner = false;
+        try {
+            BankingSystem.getInstance().getClient(registeredDNI1).removeCoownerToMainAccount(registeredDNI2);
+        } catch (ThisClientIsNotCoowner e) {
+            isNotCoowner = true;
         }
     }
 
@@ -239,6 +266,12 @@ public class ClientSteps {
         
     }
 
+    @Then("the coowner client hasn't access to the account")
+    public void verifyIfCoownerHasntAccessToTheAccount() throws Exception{
+        assertFalse(BankingSystem.getInstance().getClient(registeredDNI2).isYourAccount(account.getCbu()));
+        
+    }
+
     @Then("the coowner can't add other coowners")
     public void verifyCoownerCantAddOtherCoowners() {
         assertThrows(YouDontHavePermissions.class, () -> {
@@ -273,5 +306,10 @@ public class ClientSteps {
     @Then("an error occurs because he first has to withdraw all his funds from his bank account to be able to unsubscribe")
     public void verifyDoesAccountStillHaveFunds() {
         assertTrue(doesAccountStillHaveFunds);
+    }
+
+    @Then("an error occurs and warns that this client is not a co-owner of the account")
+    public void verifyIsNotCoowner() {
+        assertTrue(isNotCoowner);
     }
 }

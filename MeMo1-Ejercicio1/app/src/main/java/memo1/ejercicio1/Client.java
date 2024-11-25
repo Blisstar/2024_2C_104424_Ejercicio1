@@ -97,6 +97,11 @@ public class Client {
         accounts.put(account.getCbu(), account);
     }
 
+    public void deleteSecundaryAccount(Long cbu) throws ThisClientIsNotCoowner {
+        if(!accounts.containsKey(cbu)) throw new ThisClientIsNotCoowner();
+        accounts.remove(cbu);
+    }
+
     public void addCoownerToMainAccount(String coownerDNI) throws Exception {
         accounts.get(mainAccountCBU).addCoowner(this, coownerDNI);
     }
@@ -122,5 +127,9 @@ public class Client {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    public void removeCoownerToMainAccount(String coownerDNI) throws Exception {
+        accounts.get(mainAccountCBU).deleteCoowner(this, coownerDNI);
     }
 }

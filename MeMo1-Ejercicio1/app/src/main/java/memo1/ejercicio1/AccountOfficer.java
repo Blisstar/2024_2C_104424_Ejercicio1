@@ -19,8 +19,7 @@ public class AccountOfficer {
         ownerClient.setMainAccount(account);
         if (coownerClientsDNI != null){
             for (String dni : coownerClientsDNI) {
-                Client coownerClient = BankingSystem.getInstance().getClient(dni);
-                coownerClient.addSecundaryAccount(account);
+                account.addCoowner(ownerClient, dni);
             }
         }
     }
